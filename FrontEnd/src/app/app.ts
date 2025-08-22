@@ -14,7 +14,7 @@ export class App implements OnInit{
 
   ngOnInit(): void {
     console.log('ngOnInit');
-    this.dataService.getData().subscribe({
+    this.dataService.getData('User').subscribe({
       next: (response) => {
         console.log('response: ', response);
       },

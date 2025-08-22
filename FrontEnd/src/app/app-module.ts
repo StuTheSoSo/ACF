@@ -8,6 +8,7 @@ import { provideRouter } from '@angular/router';
 import { routes } from './app.routes';
 import { HomeComponent } from './components/login/home.component/home.component';
 import { LoginComponent } from './components/login/login.component/login.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { LoginComponent } from './components/login/login.component/login.compone
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule
   ],
   providers: [
     provideBrowserGlobalErrorListeners(),

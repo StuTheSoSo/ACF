@@ -6,12 +6,15 @@ import { Observable } from 'rxjs';
   providedIn: 'root' // Makes it a singleton, app-wide service
 })
 export class DataService {
-  private apiUrl = 'https://localhost:7180/WeatherForecast'; // Replace with your .NET API endpoint
+  private apiUrl = 'https://localhost:7180/'; // Replace with your .NET API endpoint
 
   constructor(private http: HttpClient) {} // Inject HttpClient
 
-  getData(): Observable<any> { // Returns an Observable of your data type (replace 'any' with your model, e.g., Observable<MyData[]>)
-    console.log('DataService.getData() called');
-    return this.http.get<any>(this.apiUrl); // Simple GET request
+  getData(endpoint:string): Observable<any> { 
+    return this.http.get<any>(this.apiUrl + endpoint); // Simple GET request
+  }
+
+  postData(endpoint: string, data: any):Observable<any>{
+    return this.http.post<any>(this.apiUrl + endpoint, data);
   }
 }

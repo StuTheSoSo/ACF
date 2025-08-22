@@ -47,18 +47,18 @@ namespace BackEnd.Controllers
             await _context.SaveChangesAsync();
         }
 
-        [HttpGet("authenticate")]
-        public async Task<Officer> AuthenticateUserAsync(string username, string password)
+        [HttpPost("authenticate")]
+        public async Task<Officer> AuthenticateUserAsync([FromBody]LoginObject loginObject)
         {
             // Find user by username
             var user = await _context.Officers
-                .FirstOrDefaultAsync(u => u.Username == username);
+                .FirstOrDefaultAsync(u => u.Username == loginObject.Username);
 
             if (user == null)
                 return null; // User not found
 
             // Verify password
-            bool isValid = VerifyPassword(password, user.PasswordHash, user.PasswordSalt);
+            bool isValid = VerifyPassword(loginObject.Password, user.PasswordHash, user.PasswordSalt);
 
             return isValid ? user : null;
         }
