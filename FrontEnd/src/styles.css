@@ -1,1 +1,12 @@
-/* You can add global styles to this file, and also import other style files */
+body {
+    font-family: 'Poppins', sans-serif;
+    background: #f0f2f5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    min-width: 200vh;
+    margin: 0;
+    padding: 20px;
+    box-sizing: border-box;
+}
