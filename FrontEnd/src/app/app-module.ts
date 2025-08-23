@@ -10,6 +10,7 @@ import { HomeComponent } from './components/home.component/home.component';
 import { LoginComponent } from './components/login/login.component/login.component';
 import { FormsModule } from '@angular/forms';
 import { RegisterComponent } from './components/register.component/register.component';
+import { HeaderComponent } from './components/header.component/header.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { RegisterComponent } from './components/register.component/register.comp
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    HeaderComponent
   ],
   providers: [
     provideBrowserGlobalErrorListeners(),

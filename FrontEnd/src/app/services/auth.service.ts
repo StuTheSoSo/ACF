@@ -1,10 +1,13 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
   private readonly TOKEN_KEY = 'jwt_token';
+
+  constructor(private router: Router){}
 
   // Check if the user is authenticated by verifying the existence and validity of the JWT
   isAuthenticated(): boolean {
@@ -19,6 +22,7 @@ export class AuthService {
   // Logout method to clear the JWT
   logout(): void {
     localStorage.removeItem(this.TOKEN_KEY);
+    this.router.navigate(['login']);
   }
 
   // Get the JWT token

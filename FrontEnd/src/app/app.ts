@@ -1,5 +1,5 @@
 import { Component, OnInit, signal } from '@angular/core';
-import { DataService } from './services/data.service.ts';
+import { AuthService } from './services/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -10,7 +10,7 @@ import { DataService } from './services/data.service.ts';
 export class App implements OnInit{
   protected readonly title = signal('FrontEnd');
 
-  constructor(private dataService: DataService){}
+  constructor(public authService: AuthService){}
 
   ngOnInit(): void {
     // console.log('ngOnInit');
