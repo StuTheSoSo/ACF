@@ -1,0 +1,43 @@
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="register-container">
+        <div class="register-box">
+            <h2>Register New Account</h2>
+            <form action="#">
+                <div class="input-group">
+                    <label for="username">Username</label>
+                    <input type="text" id="username" name="username" [(ngModel)]="registerObject.Username" required>
+                </div>
+                 <div class="input-group">
+                    <label for="firstName">First Name</label>
+                    <input type="text" id="firstName" name="firstName" [(ngModel)]="registerObject.FirstName" required>
+                </div>
+                 <div class="input-group">
+                    <label for="lastName">Last Name</label>
+                    <input type="text" id="lastName" name="lastName" [(ngModel)]="registerObject.LastName" required>
+                </div>
+                 <div class="input-group">
+                    <label for="role">Role</label>
+                    <input type="text" id="role" name="role" [(ngModel)]="registerObject.Role" required>
+                </div>
+                <div class="input-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" [(ngModel)]="registerObject.Password" required>
+                </div>
+                 <div class="input-group">
+                    <label for="confirmPassword">Confirm Password</label>
+                    <input type="password" id="confirmPassword" name="confirmPassword" [(ngModel)]="confirmPassword" required>
+                </div>
+                <button (click)="register()" class="register-button">Register</button>
+                 <div class="register-new">
+                    <a href="login">Login</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>

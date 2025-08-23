@@ -6,15 +6,17 @@ import { App } from './app';
 import { provideHttpClient } from '@angular/common/http';
 import { provideRouter } from '@angular/router';
 import { routes } from './app.routes';
-import { HomeComponent } from './components/login/home.component/home.component';
+import { HomeComponent } from './components/home.component/home.component';
 import { LoginComponent } from './components/login/login.component/login.component';
 import { FormsModule } from '@angular/forms';
+import { RegisterComponent } from './components/register.component/register.component';
 
 @NgModule({
   declarations: [
     App,
     HomeComponent,
-    LoginComponent
+    LoginComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,

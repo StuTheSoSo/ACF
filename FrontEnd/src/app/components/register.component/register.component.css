@@ -1,13 +1,13 @@
-/* Container for centering the login box */
-.login-container {
+/* Container for centering the register box */
+.register-container {
     display: flex;
     justify-content: center;
     align-items: center;
     width: 100%;
 }
 
-/* Styling for the login form box */
-.login-box {
+/* Styling for the register form box */
+.register-box {
     background: #fff;
     padding: 40px;
     border-radius: 10px;
@@ -17,7 +17,7 @@
     text-align: center;
 }
 
-.login-box h2 {
+.register-box h2 {
     margin-bottom: 20px;
     color: #333;
     font-weight: 600;
@@ -51,8 +51,8 @@
     outline: none;
 }
 
-/* Login button styling */
-.login-button {
+/* register button styling */
+.register-button {
     width: 100%;
     padding: 12px;
     background-color: #007bff;
@@ -65,7 +65,7 @@
     transition: background-color 0.3s;
 }
 
-.login-button:hover {
+.register-button:hover {
     background-color: #0056b3;
 }
 
