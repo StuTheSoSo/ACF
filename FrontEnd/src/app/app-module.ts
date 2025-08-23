@@ -11,6 +11,7 @@ import { LoginComponent } from './components/login/login.component/login.compone
 import { FormsModule } from '@angular/forms';
 import { RegisterComponent } from './components/register.component/register.component';
 import { HeaderComponent } from './components/header.component/header.component';
+import { SidebarComponent } from './components/sidebar.component/sidebar.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { HeaderComponent } from './components/header.component/header.component'
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HeaderComponent
+    HeaderComponent,
+    SidebarComponent
   ],
   providers: [
     provideBrowserGlobalErrorListeners(),

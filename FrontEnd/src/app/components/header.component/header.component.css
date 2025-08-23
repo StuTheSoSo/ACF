@@ -7,7 +7,7 @@ header {
       padding: 1rem; /* Padding for content */
       margin-right: 10rem;
       box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
-      z-index: 1000; /* Ensures header stays above other content */
+      z-index: 1100; /* Ensures header stays above other content */
       display: flex; /* Flexbox for layout */
       justify-content: space-between; /* Spreads h1 and nav */
       align-items: center; /* Vertically centers content */
@@ -28,6 +28,7 @@ header {
       color: #333; /* Dark text color */
       font-weight: 500; /* Slightly bold links */
       padding-right: 10px;
+      cursor: pointer;
     }
 
     nav a:hover {

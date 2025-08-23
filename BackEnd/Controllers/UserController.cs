@@ -50,7 +50,6 @@ namespace BackEnd.Controllers
                     RoleId = registerObject.Role,
                     PasswordHash = hash,
                     PasswordSalt = salt
-                    //CreatedAt = DateTime.UtcNow
                 };
 
                 // Save to database

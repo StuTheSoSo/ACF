@@ -20,7 +20,7 @@ export class RegisterComponent implements OnInit {
 
   ngOnInit(): void {
     // Get roles 
-    this.dataService.getData('roles').subscribe({
+    this.dataService.getData('Role').subscribe({
       next: (response) => {
         this.roles = response;
         this.roles.sort((a, b) => {
