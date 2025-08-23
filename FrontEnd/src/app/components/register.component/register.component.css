@@ -46,6 +46,16 @@
     transition: border-color 0.3s;
 }
 
+.input-group select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-size: 16px;
+    transition: border-color 0.3s;
+}
+
 .input-group input:focus {
     border-color: #007bff;
     outline: none;

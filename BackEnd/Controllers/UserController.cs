@@ -32,28 +32,35 @@ namespace BackEnd.Controllers
         [HttpPost("register")]
         public async Task RegisterUserAsync([FromBody]RegisterObject registerObject)
         {
-            // Check if username exists
-            if (await _context.Officers.AnyAsync(u => u.Username == registerObject.UserName))
-                throw new Exception("Username already exists.");
-
-            // Hash the password
-            var (hash, salt) = HashPassword(registerObject.Password);
-
-            // Create new officer
-            var officer = new Officer
+            try
             {
-                Username = registerObject.UserName,
-                FirstName = registerObject.FirstName,
-                LastName = registerObject.LastName,
-                Role = registerObject.Role,
-                PasswordHash = hash,
-                PasswordSalt = salt
-                //CreatedAt = DateTime.UtcNow
-            };
+                // Check if username exists
+                if (await _context.Officers.AnyAsync(u => u.Username == registerObject.UserName))
+                    throw new Exception("Username already exists.");
 
-            // Save to database
-            _context.Officers.Add(officer);
-            await _context.SaveChangesAsync();
+                // Hash the password
+                var (hash, salt) = HashPassword(registerObject.Password);
+
+                // Create new officer
+                var officer = new Officer
+                {
+                    Username = registerObject.UserName,
+                    FirstName = registerObject.FirstName,
+                    LastName = registerObject.LastName,
+                    RoleId = registerObject.Role,
+                    PasswordHash = hash,
+                    PasswordSalt = salt
+                    //CreatedAt = DateTime.UtcNow
+                };
+
+                // Save to database
+                _context.Officers.Add(officer);
+                await _context.SaveChangesAsync();
+            }
+            catch(Exception ex)
+            {
+                var stop = ex;
+            }
         }
 
         [HttpPost("login")]

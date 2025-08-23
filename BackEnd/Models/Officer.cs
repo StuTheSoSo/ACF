@@ -8,7 +8,7 @@
 
         public string? LastName { get; set; } = string.Empty;
 
-        public string? Role { get; set; } = string.Empty;
+        public Guid RoleId { get; set; } = Guid.Empty;
 
         public byte[]? PasswordHash { get; set; } = Array.Empty<byte>();
 

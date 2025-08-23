@@ -10,5 +10,7 @@ namespace BackEnd.Data
         }
 
         public DbSet<Officer> Officers { get; set; }
+
+        public DbSet<Role> Roles { get; set; }
     }
 }

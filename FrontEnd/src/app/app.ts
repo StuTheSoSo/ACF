@@ -13,14 +13,14 @@ export class App implements OnInit{
   constructor(private dataService: DataService){}
 
   ngOnInit(): void {
-    console.log('ngOnInit');
-    this.dataService.getData('User').subscribe({
-      next: (response) => {
-        console.log('response: ', response);
-      },
-      error: (err) => {
-        console.error('err: ', err);
-      }
-    })
+    // console.log('ngOnInit');
+    // this.dataService.getData('User').subscribe({
+    //   next: (response) => {
+    //     console.log('response: ', response);
+    //   },
+    //   error: (err) => {
+    //     console.error('err: ', err);
+    //   }
+    // })
   }
 }
