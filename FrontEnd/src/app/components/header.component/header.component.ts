@@ -1,7 +1,8 @@
 // header.component.ts
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { CommonModule } from '@angular/common'; // For *ngIf
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-header',
@@ -10,6 +11,20 @@ import { CommonModule } from '@angular/common'; // For *ngIf
   templateUrl: './header.component.html',
   styleUrl: './header.component.css'
 })
-export class HeaderComponent {
+export class HeaderComponent implements OnInit, OnDestroy {
+  username: string | null = null;
+  private userSubscription: Subscription = new Subscription();
+
   constructor(public authService: AuthService) {}
+
+  ngOnInit(): void {
+    this.userSubscription = this.authService.getCurrentUser().subscribe(username => {
+      this.username = username ?? null;
+    });
+  }
+
+    ngOnDestroy(): void {
+    // Unsubscribe to prevent memory leaks
+    this.userSubscription.unsubscribe();
+  }
 }

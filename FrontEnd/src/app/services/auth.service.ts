@@ -1,13 +1,20 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
   private readonly TOKEN_KEY = 'jwt_token';
+  private currentUserSubject = new BehaviorSubject<string>('');
+  public currentUser$: Observable<string> = this.currentUserSubject.asObservable();
 
   constructor(private router: Router){}
+
+  setUser(currentUser: string){
+    this.currentUserSubject.next(currentUser);
+  }
 
   // Check if the user is authenticated by verifying the existence and validity of the JWT
   isAuthenticated(): boolean {
@@ -45,5 +52,9 @@ export class AuthService {
       console.error('Invalid JWT:', error);
       return false;
     }
+  }
+
+    getCurrentUser(): Observable<any> {
+    return this.currentUser$;
   }
 }

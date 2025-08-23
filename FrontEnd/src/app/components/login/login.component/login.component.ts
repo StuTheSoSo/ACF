@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { DataService } from '../../../services/data.service.ts';
+import { AuthService } from '../../../services/auth.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -15,7 +16,7 @@ export class LoginComponent {
   private tokenKey = 'jwt_token';
 
 
-  constructor(private dataService: DataService, private router: Router){}
+  constructor(private dataService: DataService, private authService: AuthService, private router: Router){}
 
   login(): void{
     let loginObject = {'Username': this.username, 'Password': this.password };
@@ -23,6 +24,8 @@ export class LoginComponent {
       next: (response) => {
         // save token
         localStorage.setItem(this.tokenKey, response.token);
+        // set username
+        this.authService.setUser(this.username);
         // route to home
         this.router.navigate(['home']);
       },
