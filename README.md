@@ -22,15 +22,20 @@ The front end is written in Angular version 20, and created/scaffolded by the do
 
 In the "Front End\src\app" directory - the elements are broken up by type:
 - components:
-* All components (views) to be displayed in the application.
+
+    All components (views) to be displayed in the application.
 - guard:
-* The "auth-guard" used to protect routes. The guard checks the Auth Service for the existence/validity of the JWT in localstorage, and prevents access to routes based on that fact.
+
+    The "auth-guard" used to protect routes. The guard checks the Auth Service for the existence/validity of the JWT in localstorage, and prevents access to routes based on that fact.
 - interceptors:
-* the "auth-interceptor" is responsible for adding the JWT to outgoing http calls. It adds it to the "Authorization" key as a bearer token to be read and used by the back end for it's authorization (see "Back End")
+
+    the "auth-interceptor" is responsible for adding the JWT to outgoing http calls. It adds it to the "Authorization" key as a bearer token to be read and used by the back end for it's authorization (see "Back End")
 - models:
-* data models to be used by the front end. Objects such as "case" and "client" are passed to the back end, and used for data-binding the UI.
+
+    data models to be used by the front end. Objects such as "case" and "client" are passed to the back end, and used for data-binding the UI.
 - services:
-* services used by the application - an "auth" service to handle authentication/authorization and a "data" service to handle http calls to the back end. These services are registered, and can be injected anywhere in the app for extremely easy use.
+
+    services used by the application - an "auth" service to handle authentication/authorization and a "data" service to handle http calls to the back end. These services are registered, and can be injected anywhere in the app for extremely easy use.
 
 
 ### Back End
