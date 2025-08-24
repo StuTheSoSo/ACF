@@ -1,10 +1,93 @@
 <div class="router-div">
-<h1>New Case</h1>
-</div>
-<div>
-    <table>
-        <tr>
-            
-        </tr>
-    </table>
+    <div class="container">
+        <div class="div1">
+            <h1>New Case</h1>
+            <table>
+                <tr>
+                    <td><span>Client:</span></td>
+                    <td>
+                        <select (change)="clientUpdated($event)">
+                            @for(client of currentClients; track client.clientId){
+                            <option [value]="client.clientId">{{ client.lastName }}, {{client.firstName }}</option>
+                            } @empty {
+                            <option disabled>No clients available.</option>
+                            }
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td><span>Officer:</span></td>
+                    <td>
+                        <select (change)="officerUpdated($event)">
+                            @for(officer of currentOfficers; track officer.officerId){
+                            <option [value]="officer.officerId">{{ officer.lastName }}, {{officer.firstName }}</option>
+                            } @empty {
+                            <option disabled>No Officers available.</option>
+                            }
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td><span>Status:</span></td>
+                    <td>
+                        <select (change)="statusUpdated($event)">
+                            @for(status of statusValues; track status){
+                            <option [value]="status">{{ status }}</option>
+                            }
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td><span>Region:</span></td>
+                    <td>
+                        <select (change)="regionUpdated($event)">
+                            @for(region of regionValues; track region){
+                            <option [value]="region">{{ region }}</option>
+                            }
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td><span>Recommendations:</span></td>
+                    <td>
+                        <input [(ngModel)]="newCase.recommendations">
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <div class="button-div">
+                            <button type="button" (click)="clear()">Clear</button>
+                            <button type="button" (click)="addCase()">Add</button>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="div2">
+            <h1>Current Cases</h1>
+            <table>
+                <tr>
+                    <th>Client</th>
+                    <th>Officer</th>
+                    <th>Status</th>
+                    <th>Region</th>
+                </tr>
+                @for (case of currentCases; track case) {
+                <tr>
+                    <td>{{ case.clientName }}</td>
+                    <td>{{ case.officerName }}</td>
+                    <td>{{ case.status }}</td>
+                    <td>{{ case.region }}</td>
+                </tr>
+                } @empty {
+                <tr>
+                    <td>No cases available.</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                }
+            </table>
+        </div>
+    </div>
 </div>

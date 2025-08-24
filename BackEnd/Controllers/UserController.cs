@@ -73,6 +73,14 @@ namespace BackEnd.Controllers
             return Ok(new { Token = token });
         }
 
+        [HttpGet("getOfficers")]
+        public async Task<IActionResult> GetOfficers()
+        {
+            // RoleId for officers
+            var officerRoleId = _context.Roles.FirstOrDefault(x => x.RoleName!.ToLower().Equals("officer"))?.RoleId ?? Guid.Empty;
+            return Ok(_context.Officers.Where(x => x.RoleId == officerRoleId));
+        }
+
         
         private async Task<string> AuthenticateUserAsync(LoginObject loginObject)
         {

@@ -1,4 +1,6 @@
-﻿namespace BackEnd.Models
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace BackEnd.Models
 {
     public class Officer
     {
@@ -7,6 +9,9 @@
         public string? FirstName { get; set; } = string.Empty;
 
         public string? LastName { get; set; } = string.Empty;
+
+        [NotMapped]
+        public string FullName { get { return $"{FirstName} {LastName}"; } }
 
         public Guid RoleId { get; set; } = Guid.Empty;
 
