@@ -9,13 +9,21 @@ Thanks,
 
 Stu
 
-     
+## Highlights (What's in this demo)
+This demo contains all of the pieces required to run the front end, back end and database of the application.
+
+-Role based access controls (front end): an auth-guard ensures no route can be called without the JWT existing and being valid in localstorage. The auth service decodes the JWT to determine the users role - then ONLY displays the sidebar navigation items appropriate to that role.
+
+-Role based access controls (back end)/Secure API Endpoints: Sensitive methods are decorated at "[Authorize]" to allow only requests with the correct Bearer token, and when appropriate, are further specified (for example: "[Authorize(Roles = "Admin, Officer")]") to restrict access by role(s).
+
+-Ability to add Cases and Clients: Applicable only to Admin and Officers, so Auditors are resticted from this functionality.
+
 
 ## Design Architecture
-    The files presented here are in 3 sections:
-    1. Front End
-    2. Back End
-    3. SQL
+The files presented here are in 3 sections:
+1. Front End
+2. Back End
+3. SQL
 
 ### Front End
 The front end is written in Angular version 20, and created/scaffolded by the dotnet cli tool.
