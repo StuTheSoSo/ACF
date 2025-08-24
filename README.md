@@ -16,6 +16,8 @@ This demo contains all of the pieces required to run the front end, back end and
 
 -Role based access controls (back end)/Secure API Endpoints: Sensitive methods are decorated at "[Authorize]" to allow only requests with the correct Bearer token, and when appropriate, are further specified (for example: "[Authorize(Roles = "Admin, Officer")]") to restrict access by role(s).
 
+-Audit Logs: All interesting methods (which are only a few at this point) include logging on success and failure. The logging is done in a database table called "AuditLogs" asynchronously.
+
 -Ability to add Cases and Clients: Applicable only to Admin and Officers, so Auditors are resticted from this functionality.
 
 
@@ -29,30 +31,46 @@ The files presented here are in 3 sections:
 The front end is written in Angular version 20, and created/scaffolded by the dotnet cli tool.
 
 In the "Front End\src\app" directory - the elements are broken up by type:
-- components:
 
-    All components (views) to be displayed in the application.
-- guard:
+- <u>components</u>: All components (views) to be displayed in the application.
 
-    The "auth-guard" used to protect routes. The guard checks the Auth Service for the existence/validity of the JWT in localstorage, and prevents access to routes based on that fact.
-- interceptors:
+- <u>guard</u>: The "auth-guard" used to protect routes. The guard checks the Auth Service for the existence/validity of the JWT in localstorage, and prevents access to routes based on that fact.
 
-    the "auth-interceptor" is responsible for adding the JWT to outgoing http calls. It adds it to the "Authorization" key as a bearer token to be read and used by the back end for it's authorization (see "Back End")
-- models:
+- <u>interceptors</u>: the "auth-interceptor" is responsible for adding the JWT to outgoing http calls. It adds it to the "Authorization" key as a bearer token to be read and used by the back end for it's authorization (see "Back End").
 
-    data models to be used by the front end. Objects such as "case" and "client" are passed to the back end, and used for data-binding the UI.
-- services:
+- <u>models</u>: data models to be used by the front end. Objects such as "case" and "client" are passed to the back end, and used for data-binding the UI.
 
-    services used by the application - an "auth" service to handle authentication/authorization and a "data" service to handle http calls to the back end. These services are registered, and can be injected anywhere in the app for extremely easy use.
+- <u>services</u>: services used by the application - an "auth" service to handle authentication/authorization and a "data" service to handle http calls to the back end. These services are registered, and can be injected anywhere in the app for extremely easy use.
 
 
 ### Back End
+The back end is a web api written in .Net Core 8. The structure is as follows, although if I were to continue work on this, I would add classes/layers for "Service/Business Logic" and "Data Access/Repository" functionality.
+
+- <u>Controllers</u>: Responsible for all http functionality. Authorization, authentication and validation would be here - although in this simple demo, the controllers also contain data access functionality. That would NOT be the case in a production application.
+
+- <u>Data</u>: The applications database context. The "Code" version of the database, meant for ease of access to and from the data.
+
+- <u>Logger</u>: Custom logger to write to the database asyncronously from any controllers.
+
+- <u>Models</u>: Similar to the front end models, these are the data models to and from the database, and to and from the front end.
 
 
 
 ### SQL
+The database is (at this point) very simple, with relationships existing from the "Case" object to the Client and Officer... but other than that, this is a very simple setup at this point.
 
 
 ## Technology Decisions
+I see in the Use Case that Angular 16  was specified. I decided to user Angular 20, as (a) the Angular versions move pretty quickly and 16 is getting a little dated already, but mainly because there are changes happening in Angular to bring it inline with other typescript/javascript frameworks. The use of "@for" instead of "*ngFor" is one example. I really felt that this is not only overdue, but helps to standardize the code and make it easier for others (coming from other frameworks) to pick up quickly.
 
 ## Security Considerations
+The scurity considerations are a bit difficult to speak to with my VERY limited knowledge of the product, and the data going into it. I see "SSN" which would obviously have to be encrypted at rest - but I don't see many other fields. I CAN however assume, given the subject matter, that the data will be of a sensitive nature, and must be encrypted at rest, with specified/mandatory data retention periods - and that logging must be complete including the date/time and acting user.
+
+## Final Thoughts
+I just wanted to thank you again for the opportunity to present this demo. I battled with adding functionality vs. getting it to you quickly. Hopefully I struck the correct balance.
+
+Looking at the requirements sent, I have no doubt that I could hit the ground running on this project and contribute quickly to its success.
+
+Thanks!
+
+Stu
