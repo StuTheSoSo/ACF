@@ -18,8 +18,8 @@ export class SidebarComponent {
   // Navigation items
   navItems = [
     { name: 'Dashboard', route: 'home'},
-    { name: 'New Client', route: 'newclient' },
-    { name: 'New Case', route: 'newcase' },
+    { name: 'Clients', route: 'newclient' },
+    { name: 'Cases', route: 'newcase' },
     { name: 'My Cases', route: 'mycases'},
     { name: 'Reports', route: 'reports' },
     { name: 'Admin', route: 'logout' }

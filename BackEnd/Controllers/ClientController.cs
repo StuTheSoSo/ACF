@@ -34,5 +34,13 @@ namespace BackEnd.Controllers
                 return StatusCode(500, "Internal server error");
             }
         }
+
+        [HttpGet]
+        [Authorize]
+        public async Task<IActionResult> GetClients()
+        {
+            return Ok(_context.Clients);
+        }
+
     }
 }

@@ -7,6 +7,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace BackEnd.Controllers
 {
@@ -88,17 +89,20 @@ namespace BackEnd.Controllers
                 return null; // Invalid password
 
             // Generate JWT
-            return GenerateJwtToken(officer);
+            return await GenerateJwtToken(officer);
         }
 
 
-        private string GenerateJwtToken(Officer officer)
+        private async Task<string> GenerateJwtToken(Officer officer)
         {
+            var role = await _context.Roles.FindAsync(officer.RoleId);
+
             var claims = new[]
             {
             new Claim(ClaimTypes.NameIdentifier, officer.OfficerId.ToString()),
             new Claim(ClaimTypes.Name, officer.Username),
-            new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
+            new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+            new Claim(ClaimTypes.Role, role?.RoleName ?? "Officer")
         };
 
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]));

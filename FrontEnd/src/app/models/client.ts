@@ -1,7 +1,7 @@
 export class Client {
-    ClientId: string = '';
-    FirstName: string = '';
-    LastName: string = '';
-    SSN: string = '';
-    Eligibility: string = '';
+    clientId: string = '';
+    firstName: string = '';
+    lastName: string = '';
+    ssn: string = '';
+    eligibility: string = '';
 }
