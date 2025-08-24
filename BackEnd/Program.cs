@@ -1,4 +1,5 @@
 using BackEnd.Data;
+using BackEnd.Logger;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -47,6 +48,8 @@ builder.Services.AddAuthentication(options =>
             Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]))
     };
 });
+
+builder.Services.AddScoped<IACFLogger, ACFLogger>();
 
 var app = builder.Build();
 

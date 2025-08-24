@@ -1,4 +1,5 @@
 ﻿using BackEnd.Data;
+using BackEnd.Logger;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -12,12 +13,12 @@ namespace BackEnd.Controllers
         private readonly AppDbContext _context;
 
         /// <summary> The logger </summary>
-        private readonly ILogger<RoleController> _logger;
+        private readonly IACFLogger _logger;
 
         /// <summary> Initializes a new instance of the <see cref="RoleController"/> class. </summary>
         /// <param name="logger">  The logger. </param>
         /// <param name="context"> The context. </param>
-        public RoleController(ILogger<RoleController> logger, AppDbContext context)
+        public RoleController(IACFLogger logger, AppDbContext context)
         {
             _logger = logger;
             _context = context;

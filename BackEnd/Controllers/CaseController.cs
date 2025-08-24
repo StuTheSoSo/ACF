@@ -1,7 +1,9 @@
 ﻿using BackEnd.Data;
+using BackEnd.Logger;
 using BackEnd.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace BackEnd.Controllers
 {
@@ -13,15 +15,15 @@ namespace BackEnd.Controllers
         private readonly AppDbContext _context;
 
         /// <summary> The logger </summary>
-        private readonly ILogger<CaseController> _logger;
+        private IACFLogger _logger;
 
         /// <summary> Initializes a new instance of the <see cref="CaseController"/> class. </summary>
         /// <param name="logger">  The logger. </param>
         /// <param name="context"> The context. </param>
-        public CaseController(ILogger<CaseController> logger, AppDbContext context)
+        public CaseController(AppDbContext context, IACFLogger logger)
         {
-            _logger = logger;
             _context = context;
+            _logger = logger;
         }
 
         /// <summary> Adds the case. </summary>
@@ -37,11 +39,27 @@ namespace BackEnd.Controllers
                 newCase.UpdatedDate = DateTime.UtcNow;
                 _context.Cases.Add(newCase);
                 await _context.SaveChangesAsync();
+                _logger.LogAction(new AuditLog
+                {
+                    Action = "Add Case",
+                    CaseId = newCase.CaseId,
+                    Details = "Case Added",
+                    TimeStamp = DateTime.UtcNow,
+                    UserId = Guid.Parse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value)
+                });
+
                 return Ok(newCase);
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Error adding client");
+                _logger.LogAction(new AuditLog
+                {
+                    Action = "Error Adding Case",
+                    CaseId = newCase.CaseId,
+                    Details = ex.Message,
+                    TimeStamp = DateTime.UtcNow,
+                    UserId = Guid.Parse(User.Claims.First(c => c.Type == "UserId").Value)
+                });
                 return StatusCode(500, "Internal server error");
             }
         }

@@ -84,19 +84,19 @@ ALTER DATABASE [ACF] SET QUERY_STORE (OPERATION_MODE = READ_WRITE, CLEANUP_POLIC
 GO
 USE [ACF]
 GO
-/****** Object:  Table [dbo].[AuditLog]    Script Date: 8/24/2025 11:20:25 AM ******/
+/****** Object:  Table [dbo].[AuditLogs]    Script Date: 8/24/2025 11:20:25 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE TABLE [dbo].[AuditLog](
+CREATE TABLE [dbo].[AuditLogs](
 	[Id] [uniqueidentifier] NOT NULL,
 	[Action] [varchar](50) NULL,
 	[UserId] [uniqueidentifier] NOT NULL,
 	[TimeStamp] [datetime] NOT NULL,
 	[Details] [varchar](max) NOT NULL,
 	[CaseId] [uniqueidentifier] NOT NULL,
- CONSTRAINT [PK_AuditLog] PRIMARY KEY CLUSTERED 
+ CONSTRAINT [PK_AuditLogs] PRIMARY KEY CLUSTERED 
 (
 	[Id] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]

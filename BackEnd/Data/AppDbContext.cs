@@ -11,6 +11,10 @@ namespace BackEnd.Data
         {
         }
 
+        /// <summary> Gets or sets the audit logs. </summary>
+        /// <value> The audit logs. </value>
+        public DbSet<AuditLog> AuditLogs { get; set; }
+
         /// <summary> Gets or sets the cases. </summary>
         /// <value> The cases. </value>
         public DbSet<Case> Cases { get; set; }
