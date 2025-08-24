@@ -1,4 +1,4 @@
-import { Component, HostListener  } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { CommonModule } from '@angular/common'; // For *ngIf
 import { RouterModule } from '@angular/router';
@@ -6,26 +6,25 @@ import { RouterModule } from '@angular/router';
 @Component({
   selector: 'app-sidebar',
   standalone: true,
-  imports: [CommonModule, RouterModule], 
+  imports: [CommonModule, RouterModule],
   templateUrl: './sidebar.component.html',
   styleUrl: './sidebar.component.css'
 })
-export class SidebarComponent {
- constructor(public authService: AuthService) {}
-
- isOpen = false;
+export class SidebarComponent implements OnInit {
+  isOpen = false;
 
   // Navigation items
   navItems = [
-    { name: 'Dashboard', route: 'home'},
-    { name: 'Clients', route: 'newclient' },
-    { name: 'Cases', route: 'newcase' },
-    { name: 'My Cases', route: 'mycases'},
-    { name: 'Reports', route: 'reports' },
-    { name: 'Admin', route: 'logout' }
+    { name: 'Dashboard', route: 'home', role: 'Admin, Auditor, Officer' },
+    { name: 'Clients', route: 'newclient', role: 'Admin, Officer' },
+    { name: 'Cases', route: 'newcase', role: "Admin, Officer" },
+    { name: 'My Cases', route: 'mycases', role: 'Officer' },
+    { name: 'Reports', route: 'reports', role: 'Admin, Auditor' },
+    { name: 'Admin', route: 'logout', role: 'Admin' }
   ];
 
-  // Toggle sidebar
+  constructor(public authService: AuthService) { }
+
   toggleSidebar() {
     this.isOpen = !this.isOpen;
   }
@@ -39,5 +38,10 @@ export class SidebarComponent {
         this.isOpen = false;
       }
     }
+  }
+
+  ngOnInit(): void {
+    let userRole = this.authService.getUserRole();
+    this.navItems = this.navItems.filter(item => item.role.includes(userRole));
   }
 }

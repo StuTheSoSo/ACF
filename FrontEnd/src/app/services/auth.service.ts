@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { jwtDecode } from 'jwt-decode';
 
 @Injectable({
   providedIn: 'root',
@@ -57,4 +58,27 @@ export class AuthService {
     getCurrentUser(): Observable<any> {
     return this.currentUser$;
   }
+
+   getUserRole(): string {
+    const token = this.getToken();
+    if (token) {
+      try {
+        const decoded: JwtPayload = jwtDecode(token);
+        return decoded['http://schemas.microsoft.com/ws/2008/06/identity/claims/role']; // Extract the role claim
+      } catch (error) {
+        console.error('Error decoding JWT token:', error);
+        return '';
+      }
+    }
+    return '';
+  }
+  
 }
+
+export interface JwtPayload {
+  sub: string;
+  email: string;
+  'http://schemas.microsoft.com/ws/2008/06/identity/claims/role' : string; // Support single role or array of roles
+  exp: number;
+}
+
