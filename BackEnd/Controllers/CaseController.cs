@@ -9,34 +9,27 @@ namespace BackEnd.Controllers
     [Route("[controller]")]
     public class CaseController : ControllerBase
     {
-        private readonly ILogger<CaseController> _logger;
+        /// <summary> The context </summary>
         private readonly AppDbContext _context;
 
+        /// <summary> The logger </summary>
+        private readonly ILogger<CaseController> _logger;
+
+        /// <summary> Initializes a new instance of the <see cref="CaseController"/> class. </summary>
+        /// <param name="logger">  The logger. </param>
+        /// <param name="context"> The context. </param>
         public CaseController(ILogger<CaseController> logger, AppDbContext context)
         {
             _logger = logger;
             _context = context;
         }
 
-
-        [HttpGet]
-        [Authorize]
-        public async Task<IActionResult> GetCases()
-        {
-            // All Cases
-            var allCases = _context.Cases.ToList();
-            // Retrieve Client and officer names
-            foreach(var tempCase in allCases)
-            {
-                tempCase.ClientName = _context.Clients.FirstOrDefault(c => c.ClientId == tempCase.ClientId)?.FullName;
-                tempCase.OfficerName = _context.Officers.FirstOrDefault(o => o.OfficerId == tempCase.OfficerId)?.FullName;
-            }
-            return Ok(_context.Cases);
-        }
-
+        /// <summary> Adds the case. </summary>
+        /// <param name="newCase"> The new case. </param>
+        /// <returns> </returns>
         [HttpPost]
-        [Authorize]
-        public async Task<IActionResult> AddCase([FromBody]Case newCase)
+        [Authorize(Roles = "Admin, Officer")]
+        public async Task<IActionResult> AddCase([FromBody] Case newCase)
         {
             try
             {
@@ -51,6 +44,23 @@ namespace BackEnd.Controllers
                 _logger.LogError(ex, "Error adding client");
                 return StatusCode(500, "Internal server error");
             }
+        }
+
+        /// <summary> Gets the cases. </summary>
+        /// <returns> </returns>
+        [HttpGet]
+        [Authorize(Roles = "Admin, Officer")]
+        public async Task<IActionResult> GetCases()
+        {
+            // All Cases
+            var allCases = _context.Cases.ToList();
+            // Retrieve Client and officer names
+            foreach (var tempCase in allCases)
+            {
+                tempCase.ClientName = _context.Clients.FirstOrDefault(c => c.ClientId == tempCase.ClientId)?.FullName;
+                tempCase.OfficerName = _context.Officers.FirstOrDefault(o => o.OfficerId == tempCase.OfficerId)?.FullName;
+            }
+            return Ok(_context.Cases);
         }
     }
 }

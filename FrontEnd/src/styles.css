@@ -187,3 +187,22 @@ th.sortable::after {
 .table-action-btn:hover {
   opacity: 0.9;
 }
+
+.container {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.div1 {
+    width: 50%;
+    padding: 10px;
+    box-sizing: border-box;
+    float: left;
+}
+
+.div2 {
+    padding: 10px;
+    box-sizing: border-box;
+    float: right;
+}

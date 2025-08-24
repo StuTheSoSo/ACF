@@ -9,17 +9,26 @@ namespace BackEnd.Controllers
     [Route("[controller]")]
     public class ClientController : ControllerBase
     {
-        private readonly ILogger<ClientController> _logger;
+        /// <summary> The context </summary>
         private readonly AppDbContext _context;
 
+        /// <summary> The logger </summary>
+        private readonly ILogger<ClientController> _logger;
+
+        /// <summary> Initializes a new instance of the <see cref="ClientController"/> class. </summary>
+        /// <param name="logger">  The logger. </param>
+        /// <param name="context"> The context. </param>
         public ClientController(ILogger<ClientController> logger, AppDbContext context)
         {
             _logger = logger;
             _context = context;
         }
 
+        /// <summary> Adds the client. </summary>
+        /// <param name="client"> The client. </param>
+        /// <returns> </returns>
         [HttpPost]
-        [Authorize]
+        [Authorize(Roles = "Admin, Officer")]
         public async Task<IActionResult> AddClient([FromBody] Client client)
         {
             try
@@ -35,12 +44,13 @@ namespace BackEnd.Controllers
             }
         }
 
+        /// <summary> Gets the clients. </summary>
+        /// <returns> </returns>
         [HttpGet]
-        [Authorize]
+        [Authorize(Roles = "Admin, Officer, Auditor")]
         public async Task<IActionResult> GetClients()
         {
             return Ok(_context.Clients);
         }
-
     }
 }

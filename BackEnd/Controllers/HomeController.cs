@@ -10,16 +10,23 @@ namespace BackEnd.Controllers
     [Route("[controller]")]
     public class HomeController : ControllerBase
     {
-        private readonly ILogger<HomeController> _logger;
+        /// <summary> The context </summary>
         private readonly AppDbContext _context;
 
+        /// <summary> The logger </summary>
+        private readonly ILogger<HomeController> _logger;
 
+        /// <summary> Initializes a new instance of the <see cref="HomeController"/> class. </summary>
+        /// <param name="logger">  The logger. </param>
+        /// <param name="context"> The context. </param>
         public HomeController(ILogger<HomeController> logger, AppDbContext context)
         {
             _logger = logger;
             _context = context;
         }
 
+        /// <summary> Gets this instance. </summary>
+        /// <returns> </returns>
         [HttpGet]
         [Authorize]
         public IActionResult Get()
@@ -29,9 +36,8 @@ namespace BackEnd.Controllers
             var userIdString = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
             var allCases = this._context.Cases.Where(x => x.Status.ToLower().Equals("active"));
             var personalCases = allCases.Where(x => x.OfficerId.ToString() == userIdString);
-            
+
             return Ok(new StatsCollection(allCases.Count(), personalCases.Count()));
-           
         }
     }
 }
