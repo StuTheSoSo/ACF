@@ -1,0 +1,31 @@
+<div class="router-div">
+<h1>New Client</h1>
+</div>
+<div>
+    <table>
+        <tr>
+            <td><span>First Name:</span></td>
+            <td><input [(ngModel)]="newClient.FirstName"></td>
+        </tr>
+        <tr>
+            <td><span>Last Name:</span></td>
+            <td><input [(ngModel)]="newClient.LastName"></td>
+        </tr>
+        <tr>
+            <td><span>SSN:</span></td>
+            <td><input [(ngModel)]="newClient.SSN"></td>
+        </tr>
+        <tr>
+            <td><span>Eligibility:</span></td>
+            <td><input [(ngModel)]="newClient.Eligibility"></td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <div class="button-div">
+                <button type="button" (click)="clear()">Clear</button>
+                <button type="button" (click)="addClient()">Add</button>
+                </div>
+            </td>
+        </tr>
+    </table>
+</div>

@@ -1,11 +1,12 @@
 import { Component, HostListener  } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { CommonModule } from '@angular/common'; // For *ngIf
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-sidebar',
   standalone: true,
-  imports: [CommonModule], 
+  imports: [CommonModule, RouterModule], 
   templateUrl: './sidebar.component.html',
   styleUrl: './sidebar.component.css'
 })
@@ -16,10 +17,12 @@ export class SidebarComponent {
 
   // Navigation items
   navItems = [
-    { name: 'Dashboard', route: '/home'},
-    { name: 'New Case', route: '/users' },
-    { name: 'Reports', route: '/settings' },
-    { name: 'Admin', route: '/logout' }
+    { name: 'Dashboard', route: 'home'},
+    { name: 'New Client', route: 'newclient' },
+    { name: 'New Case', route: 'newcase' },
+    { name: 'My Cases', route: 'mycases'},
+    { name: 'Reports', route: 'reports' },
+    { name: 'Admin', route: 'logout' }
   ];
 
   // Toggle sidebar

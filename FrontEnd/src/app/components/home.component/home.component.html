@@ -1,4 +1,4 @@
-<div class="intro-div">
+<div class="router-div">
     <h1>Welcome to the Stu Schwartz ACF Demo!</h1>
     <h4>This home screen would normally be filled with statistics related to the logged in user, such as
         how many open cases he/she has, how may total cases, etc.
@@ -6,5 +6,14 @@
 </div>
 
 <div class="data-div">
-    
+    <table>
+        <tr>
+            <td>Total Active Cases:</td>
+            <td>{{totalCases}}</td>
+        </tr>
+        <tr>
+            <td>Personal Active Cases:</td>
+            <td>{{personalCases}}</td>
+        </tr>
+    </table>
 </div>
