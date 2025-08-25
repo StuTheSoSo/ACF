@@ -28,7 +28,7 @@ The files presented here are in 3 sections:
 3. SQL
 
 ### Front End
-The front end is written in Angular version 20, and created/scaffolded by the dotnet cli tool.
+The front end is written in Angular version 16.
 
 In the "Front End\src\app" directory - the elements are broken up by type:
 
@@ -44,7 +44,7 @@ In the "Front End\src\app" directory - the elements are broken up by type:
 
 
 ### Back End
-The back end is a web api written in .Net Core 8. The structure is as follows, although if I were to continue work on this, I would add classes/layers for "Service/Business Logic" and "Data Access/Repository" functionality.
+The back end is a web api written in .Net Core 7. The structure is as follows, although if I were to continue work on this, I would add classes/layers for "Service/Business Logic" and "Data Access/Repository" functionality.
 
 - <u>Controllers</u>: Responsible for all http functionality. Authorization, authentication and validation would be here - although in this simple demo, the controllers also contain data access functionality. That would NOT be the case in a production application.
 
@@ -59,9 +59,6 @@ The back end is a web api written in .Net Core 8. The structure is as follows, a
 ### SQL
 The database is (at this point) very simple, with relationships existing from the "Case" object to the Client and Officer... but other than that, this is a very simple setup at this point.
 
-
-## Technology Decisions
-I see in the Use Case that Angular 16  was specified. I decided to user Angular 20, as (a) the Angular versions move pretty quickly and 16 is getting a little dated already, but mainly because there are changes happening in Angular to bring it inline with other typescript/javascript frameworks. The use of "@for" instead of "*ngFor" is one example. I really felt that this is not only overdue, but helps to standardize the code and make it easier for others (coming from other frameworks) to pick up quickly.
 
 ## Security Considerations
 The scurity considerations are a bit difficult to speak to with my VERY limited knowledge of the product, and the data going into it. I see "SSN" which would obviously have to be encrypted at rest - but I don't see many other fields. I CAN however assume, given the subject matter, that the data will be of a sensitive nature, and must be encrypted at rest, with specified/mandatory data retention periods - and that logging must be complete including the date/time and acting user.
