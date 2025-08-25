@@ -14,5 +14,5 @@ export const routes: Routes = [
   { path: 'newcase', component: NewCaseComponent, canActivate: [ AuthGuard ] },
   { path: 'newclient', component: NewClientComponent, canActivate: [ AuthGuard ] },
   { path: 'register', component: RegisterComponent , canActivate: [ AuthGuard ]},
-  { path: '**', redirectTo: '', pathMatch: 'full' } // Wildcard for 404-like handling
+  { path: '**', redirectTo: 'login', pathMatch: 'full' } 
 ];
