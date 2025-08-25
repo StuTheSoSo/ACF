@@ -30,7 +30,7 @@ namespace BackEnd.Controllers
         /// <param name="client"> The client. </param>
         /// <returns> </returns>
         [HttpPost]
-        [Authorize(Roles = "Admin, Officer")]
+        [Authorize(Roles = "Admin, User")]
         public async Task<IActionResult> AddClient([FromBody] Client client)
         {
             try
@@ -64,7 +64,7 @@ namespace BackEnd.Controllers
         /// <summary> Gets the clients. </summary>
         /// <returns> </returns>
         [HttpGet]
-        [Authorize(Roles = "Admin, Officer, Auditor")]
+        [Authorize(Roles = "Admin, User, Auditor")]
         public async Task<IActionResult> GetClients()
         {
             return Ok(_context.Clients);

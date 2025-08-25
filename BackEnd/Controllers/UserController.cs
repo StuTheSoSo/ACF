@@ -52,7 +52,7 @@ namespace BackEnd.Controllers
         {
             // RoleId for officers
             var officerRoleId = _context.Roles.FirstOrDefault(x => x.RoleName!.ToLower().Equals("officer"))?.RoleId ?? Guid.Empty;
-            return Ok(_context.Officers.Where(x => x.RoleId == officerRoleId));
+            return Ok(_context.Users.Where(x => x.RoleId == officerRoleId));
         }
 
         /// <summary> Logins the specified login object. </summary>
@@ -87,14 +87,14 @@ namespace BackEnd.Controllers
             try
             {
                 // Check if username exists
-                if (await _context.Officers.AnyAsync(u => u.Username == registerObject.UserName))
+                if (await _context.Users.AnyAsync(u => u.Username == registerObject.UserName))
                     throw new Exception("Username already exists.");
 
                 // Hash the password
                 var (hash, salt) = HashPassword(registerObject.Password);
 
                 // Create new officer
-                var officer = new Officer
+                var officer = new User
                 {
                     Username = registerObject.UserName,
                     FirstName = registerObject.FirstName,
@@ -105,7 +105,7 @@ namespace BackEnd.Controllers
                 };
 
                 // Save to database
-                _context.Officers.Add(officer);
+                _context.Users.Add(officer);
                 await _context.SaveChangesAsync();
                 _logger.LogAction(new AuditLog
                 {
@@ -158,7 +158,7 @@ namespace BackEnd.Controllers
         private async Task<string> AuthenticateUserAsync(LoginObject loginObject)
         {
             // Find officer by username
-            var officer = await _context.Officers
+            var officer = await _context.Users
                 .FirstOrDefaultAsync(u => u.Username == loginObject.Username);
 
             if (officer == null)
@@ -176,16 +176,16 @@ namespace BackEnd.Controllers
         /// <summary> Generates the JWT token. </summary>
         /// <param name="officer"> The officer. </param>
         /// <returns> </returns>
-        private async Task<string> GenerateJwtToken(Officer officer)
+        private async Task<string> GenerateJwtToken(User officer)
         {
             var role = await _context.Roles.FindAsync(officer.RoleId);
 
             var claims = new[]
             {
-            new Claim(ClaimTypes.NameIdentifier, officer.OfficerId.ToString()),
+            new Claim(ClaimTypes.NameIdentifier, officer.UserId.ToString()),
             new Claim(ClaimTypes.Name, officer.Username),
             new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-            new Claim(ClaimTypes.Role, role?.RoleName ?? "Officer")
+            new Claim(ClaimTypes.Role, role?.RoleName ?? "User")
         };
 
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]));

@@ -2,7 +2,7 @@
 
 namespace BackEnd.Models
 {
-    public class Officer
+    public class User
     {
         /// <summary> Gets or sets the first name. </summary>
         /// <value> The first name. </value>
@@ -20,7 +20,7 @@ namespace BackEnd.Models
 
         /// <summary> Gets or sets the officer identifier. </summary>
         /// <value> The officer identifier. </value>
-        public Guid OfficerId { get; set; } = Guid.Empty;
+        public Guid UserId { get; set; } = Guid.Empty;
 
         /// <summary> Gets or sets the password hash. </summary>
         /// <value> The password hash. </value>

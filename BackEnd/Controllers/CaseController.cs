@@ -30,7 +30,7 @@ namespace BackEnd.Controllers
         /// <param name="newCase"> The new case. </param>
         /// <returns> </returns>
         [HttpPost]
-        [Authorize(Roles = "Admin, Officer")]
+        [Authorize(Roles = "Admin, User")]
         public async Task<IActionResult> AddCase([FromBody] Case newCase)
         {
             try
@@ -67,7 +67,7 @@ namespace BackEnd.Controllers
         /// <summary> Gets the cases. </summary>
         /// <returns> </returns>
         [HttpGet]
-        [Authorize(Roles = "Admin, Officer")]
+        [Authorize(Roles = "Admin, User")]
         public async Task<IActionResult> GetCases()
         {
             // All Cases
@@ -76,7 +76,7 @@ namespace BackEnd.Controllers
             foreach (var tempCase in allCases)
             {
                 tempCase.ClientName = _context.Clients.FirstOrDefault(c => c.ClientId == tempCase.ClientId)?.FullName;
-                tempCase.OfficerName = _context.Officers.FirstOrDefault(o => o.OfficerId == tempCase.OfficerId)?.FullName;
+                tempCase.OfficerName = _context.Users.FirstOrDefault(o => o.UserId == tempCase.OfficerId)?.FullName;
             }
             return Ok(_context.Cases);
         }

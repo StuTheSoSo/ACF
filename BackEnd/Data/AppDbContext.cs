@@ -25,7 +25,7 @@ namespace BackEnd.Data
 
         /// <summary> Gets or sets the officers. </summary>
         /// <value> The officers. </value>
-        public DbSet<Officer> Officers { get; set; }
+        public DbSet<User> Users { get; set; }
 
         /// <summary> Gets or sets the roles. </summary>
         /// <value> The roles. </value>

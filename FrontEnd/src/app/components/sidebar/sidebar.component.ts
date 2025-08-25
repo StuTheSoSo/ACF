@@ -20,7 +20,7 @@ export class SidebarComponent implements OnInit {
     { name: 'Cases', route: 'newcase', role: "Admin, Officer" },
     { name: 'My Cases', route: 'mycases', role: 'Officer' },
     { name: 'Reports', route: 'reports', role: 'Admin, Auditor' },
-    { name: 'Admin', route: 'logout', role: 'Admin' }
+    { name: 'Admin', route: 'admin', role: 'Admin' }
   ];
 
   constructor(public authService: AuthService) { }

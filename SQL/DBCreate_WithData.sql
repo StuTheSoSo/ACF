@@ -1,6 +1,6 @@
 USE [master]
 GO
-/****** Object:  Database [ACF]    Script Date: 8/24/2025 11:20:24 AM ******/
+/****** Object:  Database [ACF]    Script Date: 8/25/2025 5:10:45 PM ******/
 CREATE DATABASE [ACF]
  CONTAINMENT = NONE
  ON  PRIMARY 
@@ -84,7 +84,7 @@ ALTER DATABASE [ACF] SET QUERY_STORE (OPERATION_MODE = READ_WRITE, CLEANUP_POLIC
 GO
 USE [ACF]
 GO
-/****** Object:  Table [dbo].[AuditLogs]    Script Date: 8/24/2025 11:20:25 AM ******/
+/****** Object:  Table [dbo].[AuditLogs]    Script Date: 8/25/2025 5:10:46 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -96,13 +96,13 @@ CREATE TABLE [dbo].[AuditLogs](
 	[TimeStamp] [datetime] NOT NULL,
 	[Details] [varchar](max) NOT NULL,
 	[CaseId] [uniqueidentifier] NOT NULL,
- CONSTRAINT [PK_AuditLogs] PRIMARY KEY CLUSTERED 
+ CONSTRAINT [PK_AuditLog] PRIMARY KEY CLUSTERED 
 (
 	[Id] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Cases]    Script Date: 8/24/2025 11:20:25 AM ******/
+/****** Object:  Table [dbo].[Cases]    Script Date: 8/25/2025 5:10:46 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -122,7 +122,7 @@ CREATE TABLE [dbo].[Cases](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Clients]    Script Date: 8/24/2025 11:20:25 AM ******/
+/****** Object:  Table [dbo].[Clients]    Script Date: 8/25/2025 5:10:46 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -139,26 +139,7 @@ CREATE TABLE [dbo].[Clients](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Officers]    Script Date: 8/24/2025 11:20:25 AM ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-CREATE TABLE [dbo].[Officers](
-	[OfficerId] [uniqueidentifier] NOT NULL,
-	[FirstName] [varchar](50) NOT NULL,
-	[LastName] [varchar](50) NOT NULL,
-	[RoleId] [uniqueidentifier] NULL,
-	[PasswordHash] [varbinary](64) NULL,
-	[PasswordSalt] [varbinary](32) NULL,
-	[UserName] [varchar](max) NULL,
- CONSTRAINT [PK_Officer] PRIMARY KEY CLUSTERED 
-(
-	[OfficerId] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
-) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
-GO
-/****** Object:  Table [dbo].[Roles]    Script Date: 8/24/2025 11:20:25 AM ******/
+/****** Object:  Table [dbo].[Roles]    Script Date: 8/25/2025 5:10:46 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -172,7 +153,7 @@ CREATE TABLE [dbo].[Roles](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[ServiceProvider]    Script Date: 8/24/2025 11:20:25 AM ******/
+/****** Object:  Table [dbo].[ServiceProvider]    Script Date: 8/25/2025 5:10:46 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -187,17 +168,36 @@ CREATE TABLE [dbo].[ServiceProvider](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-INSERT [dbo].[Cases] ([CaseId], [ClientId], [OfficerId], [Status], [Region], [Recommendations], [CreatedDate], [UpdatedDate]) VALUES (N'ecd9d272-5849-410c-98bb-7390f3056c28', N'ad02fff6-f2da-4586-b820-5e7e552462ef', N'b96a628c-4d81-403a-6e3b-08dde279a431', N'Inactive', N'South', N'testing', CAST(N'2025-08-24T14:39:19.190' AS DateTime), CAST(N'2025-08-24T14:39:19.190' AS DateTime))
+/****** Object:  Table [dbo].[Users]    Script Date: 8/25/2025 5:10:46 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Users](
+	[UserId] [uniqueidentifier] NOT NULL,
+	[FirstName] [varchar](50) NOT NULL,
+	[LastName] [varchar](50) NOT NULL,
+	[RoleId] [uniqueidentifier] NULL,
+	[PasswordHash] [varbinary](64) NULL,
+	[PasswordSalt] [varbinary](32) NULL,
+	[UserName] [varchar](max) NULL,
+ CONSTRAINT [PK_Officer] PRIMARY KEY CLUSTERED 
+(
+	[UserId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+INSERT [dbo].[AuditLogs] ([Id], [Action], [UserId], [TimeStamp], [Details], [CaseId]) VALUES (N'd2694d6f-067d-40e2-bfb4-bc25f4197935', N'', N'13fdd15e-5d8a-4d31-60e1-08dde272829e', CAST(N'2025-08-24T19:23:35.513' AS DateTime), N'Case Added', N'5a7e111e-5c20-4779-80bc-dc42c1b1f491')
+GO
+INSERT [dbo].[Cases] ([CaseId], [ClientId], [OfficerId], [Status], [Region], [Recommendations], [CreatedDate], [UpdatedDate]) VALUES (N'106ab7c1-1889-427b-b754-09799e0f4c32', N'6d334db7-85e5-4c7f-abf9-20686f8a9875', N'b96a628c-4d81-403a-6e3b-08dde279a431', N'Active', N'North', N'rrrrrrr', CAST(N'2025-08-24T19:22:43.237' AS DateTime), CAST(N'2025-08-24T19:22:43.237' AS DateTime))
+GO
+INSERT [dbo].[Cases] ([CaseId], [ClientId], [OfficerId], [Status], [Region], [Recommendations], [CreatedDate], [UpdatedDate]) VALUES (N'f88ada7a-1a60-4d61-9793-c2f0c8d664bb', N'6d334db7-85e5-4c7f-abf9-20686f8a9875', N'b96a628c-4d81-403a-6e3b-08dde279a431', N'Active', N'North', N'ttttttt', CAST(N'2025-08-24T19:17:24.950' AS DateTime), CAST(N'2025-08-24T19:17:24.950' AS DateTime))
+GO
+INSERT [dbo].[Cases] ([CaseId], [ClientId], [OfficerId], [Status], [Region], [Recommendations], [CreatedDate], [UpdatedDate]) VALUES (N'5a7e111e-5c20-4779-80bc-dc42c1b1f491', N'6d334db7-85e5-4c7f-abf9-20686f8a9875', N'b96a628c-4d81-403a-6e3b-08dde279a431', N'Active', N'North', N'eeeeee', CAST(N'2025-08-24T19:23:33.327' AS DateTime), CAST(N'2025-08-24T19:23:33.327' AS DateTime))
 GO
 INSERT [dbo].[Clients] ([ClientId], [FirstName], [LastName], [SSN], [Eligibility]) VALUES (N'6d334db7-85e5-4c7f-abf9-20686f8a9875', N'Kurt', N'Client', N'000-00-0000', N'Eligible')
 GO
 INSERT [dbo].[Clients] ([ClientId], [FirstName], [LastName], [SSN], [Eligibility]) VALUES (N'ad02fff6-f2da-4586-b820-5e7e552462ef', N'Fred', N'Client', N'111-11-1111', N'Eligible')
-GO
-INSERT [dbo].[Officers] ([OfficerId], [FirstName], [LastName], [RoleId], [PasswordHash], [PasswordSalt], [UserName]) VALUES (N'13fdd15e-5d8a-4d31-60e1-08dde272829e', N'stu', N'schwartz', N'751101d5-e8cc-49d9-bc2f-30b7e8610355', 0x64484E7B41D8AF16D1B56B15497F1FD8AB2D4375E09065E14A81670E017A6FAAE760596E15DA534A51A424F46B7EA5F548EDB0720AB3DE19D0686D5181F5EE4B, 0xF4979CB3478E435C70C0BE8E387A17CB1EB4A7A8369B7BE0DB286A535B3026D6, N'stu')
-GO
-INSERT [dbo].[Officers] ([OfficerId], [FirstName], [LastName], [RoleId], [PasswordHash], [PasswordSalt], [UserName]) VALUES (N'b96a628c-4d81-403a-6e3b-08dde279a431', N'officer', N'officer', N'd7aebb96-ba5b-467b-91cc-835c3afd53fc', 0x07875C9A5EBCA3DA0877BC1049F3C4D9404A8762BA4AAD574F170A25B4BCB848F4BFA40C276D4B02561B786FC576DF9BDBF49DCAE6DACA084ACD4B2805833E1A, 0xF15B66081575D981FF2394844A9DDC565E2716F361DF4DA8F11BAD0F4D225B86, N'officer')
-GO
-INSERT [dbo].[Officers] ([OfficerId], [FirstName], [LastName], [RoleId], [PasswordHash], [PasswordSalt], [UserName]) VALUES (N'9021ac72-f48d-4a14-6e3c-08dde279a431', N'auditor', N'auditor', N'290d865c-2a55-496e-bf52-213d689396fb', 0xE26ECA8440A6DACC7E9F8BFE9F25FDCFF19D0516DAFE94C819C09173A9995EF8DE06818F8CCC51D3F51683ACD19629E03AEA061518055E4258F1312B56BB8AC8, 0xDB8F0D99C9D15F6B3CCA26867BF467E8F8AA7DE1691F9B280FF2022DB2A1464A, N'auditor')
 GO
 INSERT [dbo].[Roles] ([RoleId], [RoleName]) VALUES (N'290d865c-2a55-496e-bf52-213d689396fb', N'Auditor')
 GO
@@ -205,20 +205,26 @@ INSERT [dbo].[Roles] ([RoleId], [RoleName]) VALUES (N'751101d5-e8cc-49d9-bc2f-30
 GO
 INSERT [dbo].[Roles] ([RoleId], [RoleName]) VALUES (N'd7aebb96-ba5b-467b-91cc-835c3afd53fc', N'Officer')
 GO
+INSERT [dbo].[Users] ([UserId], [FirstName], [LastName], [RoleId], [PasswordHash], [PasswordSalt], [UserName]) VALUES (N'13fdd15e-5d8a-4d31-60e1-08dde272829e', N'stu', N'schwartz', N'751101d5-e8cc-49d9-bc2f-30b7e8610355', 0x64484E7B41D8AF16D1B56B15497F1FD8AB2D4375E09065E14A81670E017A6FAAE760596E15DA534A51A424F46B7EA5F548EDB0720AB3DE19D0686D5181F5EE4B, 0xF4979CB3478E435C70C0BE8E387A17CB1EB4A7A8369B7BE0DB286A535B3026D6, N'stu')
+GO
+INSERT [dbo].[Users] ([UserId], [FirstName], [LastName], [RoleId], [PasswordHash], [PasswordSalt], [UserName]) VALUES (N'b96a628c-4d81-403a-6e3b-08dde279a431', N'officer', N'officer', N'd7aebb96-ba5b-467b-91cc-835c3afd53fc', 0x07875C9A5EBCA3DA0877BC1049F3C4D9404A8762BA4AAD574F170A25B4BCB848F4BFA40C276D4B02561B786FC576DF9BDBF49DCAE6DACA084ACD4B2805833E1A, 0xF15B66081575D981FF2394844A9DDC565E2716F361DF4DA8F11BAD0F4D225B86, N'officer')
+GO
+INSERT [dbo].[Users] ([UserId], [FirstName], [LastName], [RoleId], [PasswordHash], [PasswordSalt], [UserName]) VALUES (N'9021ac72-f48d-4a14-6e3c-08dde279a431', N'auditor', N'auditor', N'290d865c-2a55-496e-bf52-213d689396fb', 0xE26ECA8440A6DACC7E9F8BFE9F25FDCFF19D0516DAFE94C819C09173A9995EF8DE06818F8CCC51D3F51683ACD19629E03AEA061518055E4258F1312B56BB8AC8, 0xDB8F0D99C9D15F6B3CCA26867BF467E8F8AA7DE1691F9B280FF2022DB2A1464A, N'auditor')
+GO
 ALTER TABLE [dbo].[Cases]  WITH CHECK ADD  CONSTRAINT [FK_Case_Client] FOREIGN KEY([ClientId])
 REFERENCES [dbo].[Clients] ([ClientId])
 GO
 ALTER TABLE [dbo].[Cases] CHECK CONSTRAINT [FK_Case_Client]
 GO
 ALTER TABLE [dbo].[Cases]  WITH CHECK ADD  CONSTRAINT [FK_Case_Officer] FOREIGN KEY([OfficerId])
-REFERENCES [dbo].[Officers] ([OfficerId])
+REFERENCES [dbo].[Users] ([UserId])
 GO
 ALTER TABLE [dbo].[Cases] CHECK CONSTRAINT [FK_Case_Officer]
 GO
-ALTER TABLE [dbo].[Officers]  WITH CHECK ADD  CONSTRAINT [FK_Officers_Roles] FOREIGN KEY([RoleId])
+ALTER TABLE [dbo].[Users]  WITH CHECK ADD  CONSTRAINT [FK_Officers_Roles] FOREIGN KEY([RoleId])
 REFERENCES [dbo].[Roles] ([RoleId])
 GO
-ALTER TABLE [dbo].[Officers] CHECK CONSTRAINT [FK_Officers_Roles]
+ALTER TABLE [dbo].[Users] CHECK CONSTRAINT [FK_Officers_Roles]
 GO
 USE [master]
 GO
