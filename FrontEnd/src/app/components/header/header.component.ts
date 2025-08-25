@@ -9,7 +9,7 @@ import { Subscription } from 'rxjs';
   standalone: true,
   imports: [CommonModule], // Import CommonModule for *ngIf
   templateUrl: './header.component.html',
-  styleUrl: './header.component.css'
+  styleUrls: [ './header.component.css']
 })
 export class HeaderComponent implements OnInit, OnDestroy {
   username: string | null = null;

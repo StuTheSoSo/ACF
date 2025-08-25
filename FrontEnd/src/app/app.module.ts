@@ -1,0 +1,40 @@
+import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { RouterModule } from '@angular/router'; 
+import { HttpClientModule } from '@angular/common/http';
+
+import { routes } from './app.routes';
+import { AppRoutingModule } from './app-routing.module';
+import { FormsModule } from '@angular/forms';
+import { AppComponent } from './app.component';
+import { LoginComponent } from './components/login/login.component';
+import { RegisterComponent } from './components/register/register.component';
+import { HomeComponent } from './components/home/home.component';
+import { HeaderComponent } from './components/header/header.component';
+import { NewCaseComponent } from './components/new-case/new-case.component';
+import { SidebarComponent } from './components/sidebar/sidebar.component';
+import { NewClientComponent } from './components/new-client/new-client.component';
+
+
+@NgModule({
+  declarations: [
+    AppComponent,
+    LoginComponent,
+    RegisterComponent,
+    HomeComponent,
+    NewCaseComponent,
+    NewClientComponent
+  ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    FormsModule,
+    RouterModule.forRoot(routes),
+    HttpClientModule,
+    HeaderComponent,
+    SidebarComponent,
+  ],
+  providers: [],
+  bootstrap: [AppComponent]
+})
+export class AppModule { }

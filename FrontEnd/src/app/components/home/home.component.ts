@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { DataService } from '../../services/data.service.ts';
+import { DataService } from '../../services/data.service';
 
 @Component({
   selector: 'app-home.component',
   standalone: false,
   templateUrl: './home.component.html',
-  styleUrl: './home.component.css'
+  styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit{
   totalCases: number = 0;

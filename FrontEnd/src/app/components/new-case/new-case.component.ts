@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Case } from '../../models/case';
-import { DataService } from '../../services/data.service.ts';
+import { DataService } from '../../services/data.service';
 import { Client } from '../../models/client';
 import { User } from '../../models/user';
 
@@ -8,7 +8,7 @@ import { User } from '../../models/user';
   selector: 'app-new-case.component',
   standalone: false,
   templateUrl: './new-case.component.html',
-  styleUrl: './new-case.component.css'
+  styleUrls: ['./new-case.component.css']
 })
 export class NewCaseComponent implements OnInit {
   newCase: Case = new Case();

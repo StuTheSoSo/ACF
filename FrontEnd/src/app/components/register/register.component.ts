@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { RegisterObject } from '../../models/register.object';
-import { DataService } from '../../services/data.service.ts';
+import { DataService } from '../../services/data.service';
 import { Router } from '@angular/router';
 import { Role } from '../../models/role';
 
@@ -8,7 +8,7 @@ import { Role } from '../../models/role';
   selector: 'app-register.component',
   standalone: false,
   templateUrl: './register.component.html',
-  styleUrl: './register.component.css'
+  styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
   roles: Role[] = [];;

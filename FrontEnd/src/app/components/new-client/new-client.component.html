@@ -38,21 +38,12 @@
                     <th>SSN</th>
                     <th>Eligibility</th>
                 </tr>
-                @for (client of currentClients; track client) {
-                <tr>
+                <tr *ngFor="let client of currentClients">
                     <td>{{ client.firstName }}</td>
                     <td>{{ client.lastName }}</td>
                     <td>{{ client.ssn }}</td>
                     <td>{{ client.eligibility }}</td>
                 </tr>
-                } @empty {
-                <tr>
-                    <td>No clients available.</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                }
             </table>
         </div>
     </div>

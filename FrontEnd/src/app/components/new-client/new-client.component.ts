@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Client } from '../../models/client';
-import { DataService } from '../../services/data.service.ts';
+import { DataService } from '../../services/data.service';
 
 @Component({
   selector: 'app-new-client.component',
   standalone: false,
   templateUrl: './new-client.component.html',
-  styleUrl: './new-client.component.css'
+  styleUrls: ['./new-client.component.css']
 })
 export class NewClientComponent implements OnInit {
   newClient: Client = new Client();

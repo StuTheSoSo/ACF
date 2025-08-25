@@ -23,16 +23,11 @@
                     <label for="lastName">Last Name</label>
                     <input type="text" id="lastName" name="lastName" [(ngModel)]="registerObject.LastName" required>
                 </div>
-                <!-- <div class="input-group">
-                    <label for="role">Role</label>
-                    <input type="text" id="role" name="role" [(ngModel)]="registerObject.Role" required>
-                </div> -->
                 <div class="input-group">
+                    <label for="roleId">Role</label>
                     <select name="roleId" [(ngModel)]="selectedRoleId" (ngModelChange)="onRoleChange($event)">
                         <option value="" disabled>Select a role</option>
-                        @for (role of roles; track role.roleId) {
-                        <option [value]="role.roleId">{{ role.roleName }}</option>
-                        }
+                        <option *ngFor="let role of roles" [value]="role.roleId">{{ role.roleName }}</option>
                     </select>
                 </div>
                 <div class="input-group">

@@ -7,11 +7,8 @@
                     <td><span>Client:</span></td>
                     <td>
                         <select (change)="clientUpdated($event)">
-                            @for(client of currentClients; track client.clientId){
-                            <option [value]="client.clientId">{{ client.lastName }}, {{client.firstName }}</option>
-                            } @empty {
-                            <option disabled>No clients available.</option>
-                            }
+                            <option *ngFor="let client of currentClients" [value]="client.clientId">{{ client.lastName }}, {{client.firstName }}</option>
+                           
                         </select>
                     </td>
                 </tr>
@@ -19,11 +16,7 @@
                     <td><span>Officer:</span></td>
                     <td>
                         <select (change)="officerUpdated($event)">
-                            @for(officer of currentOfficers; track officer.officerId){
-                            <option [value]="officer.officerId">{{ officer.lastName }}, {{officer.firstName }}</option>
-                            } @empty {
-                            <option disabled>No Officers available.</option>
-                            }
+                            <option *ngFor="let officer of currentOfficers" [value]="officer.officerId">{{ officer.lastName }}, {{officer.firstName }}</option>                            
                         </select>
                     </td>
                 </tr>
@@ -31,9 +24,7 @@
                     <td><span>Status:</span></td>
                     <td>
                         <select (change)="statusUpdated($event)">
-                            @for(status of statusValues; track status){
-                            <option [value]="status">{{ status }}</option>
-                            }
+                            <option *ngFor="let status of statusValues" [value]="status">{{ status }}</option>
                         </select>
                     </td>
                 </tr>
@@ -41,9 +32,7 @@
                     <td><span>Region:</span></td>
                     <td>
                         <select (change)="regionUpdated($event)">
-                            @for(region of regionValues; track region){
-                            <option [value]="region">{{ region }}</option>
-                            }
+                            <option *ngFor="let region of regionValues" [value]="region">{{ region }}</option>
                         </select>
                     </td>
                 </tr>
@@ -72,21 +61,12 @@
                     <th>Status</th>
                     <th>Region</th>
                 </tr>
-                @for (case of currentCases; track case) {
-                <tr>
+                <tr *ngFor="let case of currentCases">
                     <td>{{ case.clientName }}</td>
                     <td>{{ case.officerName }}</td>
                     <td>{{ case.status }}</td>
                     <td>{{ case.region }}</td>
-                </tr>
-                } @empty {
-                <tr>
-                    <td>No cases available.</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                }
+                </tr>                
             </table>
         </div>
     </div>
