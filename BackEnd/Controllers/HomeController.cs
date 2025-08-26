@@ -1,5 +1,4 @@
 ﻿using BackEnd.Data;
-using BackEnd.Logger;
 using BackEnd.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -14,15 +13,11 @@ namespace BackEnd.Controllers
         /// <summary> The context </summary>
         private readonly AppDbContext _context;
 
-        /// <summary> The logger </summary>
-        private readonly IACFLogger _logger;
-
         /// <summary> Initializes a new instance of the <see cref="HomeController"/> class. </summary>
         /// <param name="logger">  The logger. </param>
         /// <param name="context"> The context. </param>
-        public HomeController(IACFLogger logger, AppDbContext context)
+        public HomeController(AppDbContext context)
         {
-            _logger = logger;
             _context = context;
         }
 

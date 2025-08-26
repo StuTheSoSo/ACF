@@ -1,5 +1,4 @@
 ﻿using BackEnd.Data;
-using BackEnd.Logger;
 using BackEnd.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -30,16 +29,12 @@ namespace BackEnd.Controllers
         /// <summary> The context </summary>
         private readonly AppDbContext _context;
 
-        /// <summary> The logger </summary>
-        private readonly IACFLogger _logger;
-
         /// <summary> Initializes a new instance of the <see cref="UserController"/> class. </summary>
         /// <param name="logger">        The logger. </param>
         /// <param name="context">       The context. </param>
         /// <param name="configuration"> The configuration. </param>
-        public UserController(IACFLogger logger, AppDbContext context, IConfiguration configuration)
+        public UserController(AppDbContext context, IConfiguration configuration)
         {
-            _logger = logger;
             _context = context;
             _configuration = configuration;
         }
@@ -64,14 +59,6 @@ namespace BackEnd.Controllers
             var token = await AuthenticateUserAsync(loginObject);
             if (token == null)
             {
-                _logger.LogAction(new AuditLog
-                {
-                    Action = "Invalid username or password",
-                    CaseId = Guid.Empty,
-                    Details = "Invalid username or password",
-                    TimeStamp = DateTime.UtcNow,
-                    UserId = Guid.Parse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value)
-                });
                 return Unauthorized("Invalid username or password");
             }
 
@@ -107,14 +94,6 @@ namespace BackEnd.Controllers
                 // Save to database
                 _context.Users.Add(officer);
                 await _context.SaveChangesAsync();
-                _logger.LogAction(new AuditLog
-                {
-                    Action = "New User Registered",
-                    CaseId = Guid.Empty,
-                    Details = "New User Registered",
-                    TimeStamp = DateTime.UtcNow,
-                    UserId = Guid.Parse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value)
-                });
             }
             catch (Exception ex)
             {
