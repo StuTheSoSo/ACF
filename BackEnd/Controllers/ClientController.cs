@@ -2,6 +2,7 @@
 using BackEnd.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace BackEnd.Controllers
 {
@@ -27,17 +28,19 @@ namespace BackEnd.Controllers
         /// <param name="client"> The client. </param>
         /// <returns> </returns>
         [HttpPost]
-        [Authorize(Roles = "Admin, User")]
+        [Authorize(Roles = "Admin, Officer")]
         public async Task<IActionResult> AddClient([FromBody] Client client)
         {
             try
             {
                 _context.Clients.Add(client);
                 await _context.SaveChangesAsync();
+                _logger.LogInformation("Client added successfully: {ClientId} by {UserId}", client.ClientId, User.FindFirst(ClaimTypes.NameIdentifier)?.Value);
                 return Ok(client);
             }
             catch (Exception ex)
             {
+                _logger.LogError(ex, "Error in AddClient: {0}", ex.Message);
                 return StatusCode(500, "Internal server error");
             }
         }
@@ -45,11 +48,19 @@ namespace BackEnd.Controllers
         /// <summary> Gets the clients. </summary>
         /// <returns> </returns>
         [HttpGet]
-        [Authorize(Roles = "Admin, User, Auditor")]
+        [Authorize(Roles = "Admin, Officer, Auditor")]
         public async Task<IActionResult> GetClients()
         {
-            _logger.Log(LogLevel.Information, "GetClients called");
-            return Ok(_context.Clients);
+            try
+            {
+                _logger.LogInformation("Fetching all clients: {UserId}", User.FindFirst(ClaimTypes.NameIdentifier)?.Value);
+                return Ok(_context.Clients);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error in GetClients: {0}", ex.Message);
+            }
+            return StatusCode(500, "Internal server error");
         }
     }
 }

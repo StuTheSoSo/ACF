@@ -41,7 +41,9 @@ internal class Program
                     // Configure additional columns
                     AdditionalColumns = new List<SqlColumn>
                     {
-                new SqlColumn { ColumnName = "AppVersion", DataType = SqlDbType.NVarChar, DataLength = 50 }
+                        new SqlColumn { ColumnName = "CaseId", DataType = SqlDbType.UniqueIdentifier, DataLength = 50 },
+                        new SqlColumn { ColumnName = "ClientId", DataType = SqlDbType.UniqueIdentifier, DataLength = 50 },
+                        new SqlColumn { ColumnName = "UserId", DataType = SqlDbType.UniqueIdentifier, DataLength = 50 }
                     }
                 })
             .CreateLogger();

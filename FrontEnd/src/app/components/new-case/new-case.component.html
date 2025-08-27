@@ -16,7 +16,7 @@
                     <td><span>Officer:</span></td>
                     <td>
                         <select (change)="officerUpdated($event)">
-                            <option *ngFor="let officer of currentOfficers" [value]="officer.officerId">{{ officer.lastName }}, {{officer.firstName }}</option>                            
+                            <option *ngFor="let officer of currentOfficers" [value]="officer.userId">{{ officer.lastName }}, {{officer.firstName }}</option>                            
                         </select>
                     </td>
                 </tr>

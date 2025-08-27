@@ -17,6 +17,8 @@ import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { NewClientComponent } from './components/new-client/new-client.component';
 import { ReportsComponent } from './components/reports/reports.component';
 import { AdminComponent } from './components/admin/admin.component';
+import { UsageReportComponent } from './components/reports/usage-report/usage-report.component';
+import { CaseReportComponent } from './components/reports/case-report/case-report.component';
 
 
 @NgModule({
@@ -28,7 +30,9 @@ import { AdminComponent } from './components/admin/admin.component';
     NewCaseComponent,
     NewClientComponent,
     ReportsComponent,
-    AdminComponent
+    AdminComponent,
+    UsageReportComponent,
+    CaseReportComponent
   ],
   imports: [
     BrowserModule,

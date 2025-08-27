@@ -57,7 +57,8 @@ export class NewCaseComponent implements OnInit {
     this.dataService.getData('User/getOfficers').subscribe({
       next: (response) => {
         this.currentOfficers = response;
-        this.newCase.officerId = this.currentOfficers[0].officerId;
+        console.log('officers:', this.currentOfficers)
+        this.newCase.officerId = this.currentOfficers[0].userId;
       },
       error: (err) => {
         console.error('err: ', err);

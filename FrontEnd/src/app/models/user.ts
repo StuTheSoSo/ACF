@@ -1,5 +1,5 @@
 export class User {
-    officerId: string = '';
+    userId: string = '';
     firstName: string = '';
     lastName: string = '';
     fullName: string = '';
