@@ -19,6 +19,8 @@ import { ReportsComponent } from './components/reports/reports.component';
 import { AdminComponent } from './components/admin/admin.component';
 import { UsageReportComponent } from './components/reports/usage-report/usage-report.component';
 import { CaseReportComponent } from './components/reports/case-report/case-report.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MatTableModule} from '@angular/material/table';
 
 
 @NgModule({
@@ -42,6 +44,8 @@ import { CaseReportComponent } from './components/reports/case-report/case-repor
     HttpClientModule,
     HeaderComponent,
     SidebarComponent,
+    BrowserAnimationsModule,
+    MatTableModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }

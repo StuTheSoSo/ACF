@@ -1,28 +1,25 @@
-﻿namespace BackEnd.Models
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace BackEnd.Models
 {
     public class AuditLog
     {
-        public Guid Id { get; set; } = Guid.NewGuid();
-        public string Action { get; set; } = string.Empty;
-        public Guid UserId { get; set; } = Guid.Empty;
-        public DateTime TimeStamp { get; set; } = DateTime.UtcNow;
-        public string Details { get; set; } = string.Empty;
-        public Guid? CaseId { get; set; } = null;
+        public int Id { get; set; }
+        public string? Message { get; set; } = string.Empty;
 
-        public AuditLog()
-        {
-            
-        }
+        public string? MessageTemplate { get; set; } = string.Empty;
+        public string? Level { get; set; } = string.Empty;
+        public DateTime? TimeStamp { get; set; } = DateTime.UtcNow;
+        public string? Exception { get; set; } = string.Empty;
+        public string? Properties { get; set; } = string.Empty;
+        public Guid? CaseId { get; set; } = Guid.Empty;
+        public Guid? ClientId { get; set; } = Guid.Empty;
+        [NotMapped]
+        public string? ClientName { get; set; } = string.Empty;
+        public Guid? UserId { get; set; } = Guid.Empty;
+        [NotMapped]
+        public string? UserName { get; set; } = string.Empty;
 
 
-        public AuditLog(AuditLog other)
-        {
-            Id = other.Id;
-            Action = other.Action;
-            UserId = other.UserId;
-            TimeStamp = other.TimeStamp;
-            Details = other.Details;
-            CaseId = other.CaseId;
-        }
     }
 }

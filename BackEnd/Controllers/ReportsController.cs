@@ -59,5 +59,17 @@ namespace BackEnd.Controllers
                 .Select(c => c);
             return Ok(cases);
         }
+
+        [HttpGet("getUsage")]
+        public IActionResult GetUsage()
+        {
+            var auditLogs = _context.AuditLogs.OrderBy(x => x.TimeStamp).ToList();
+            foreach (var item in auditLogs)
+            {
+                item.ClientName = _context.Clients.FirstOrDefault(c => c.ClientId == item.ClientId)?.FullName;
+                item.UserName = _context.Users.FirstOrDefault(u => u.UserId == item.UserId)?.FullName;
+            }
+            return Ok(auditLogs);
+        }
     }
 }

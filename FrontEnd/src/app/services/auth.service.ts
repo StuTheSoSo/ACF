@@ -8,13 +8,12 @@ import { jwtDecode } from 'jwt-decode';
 })
 export class AuthService {
   private readonly TOKEN_KEY = 'jwt_token';
-  private currentUserSubject = new BehaviorSubject<string>('');
-  public currentUser$: Observable<string> = this.currentUserSubject.asObservable();
+  private readonly CURRENT_USER_KEY = "current_user";
 
-  constructor(private router: Router){}
+  constructor(private router: Router) { }
 
-  setUser(currentUser: string){
-    this.currentUserSubject.next(currentUser);
+  setUser(currentUser: string) {
+    localStorage.setItem(this.CURRENT_USER_KEY, currentUser);
   }
 
   // Check if the user is authenticated by verifying the existence and validity of the JWT
@@ -30,6 +29,7 @@ export class AuthService {
   // Logout method to clear the JWT
   logout(): void {
     localStorage.removeItem(this.TOKEN_KEY);
+    localStorage.removeItem(this.CURRENT_USER_KEY)
     this.router.navigate(['login']);
   }
 
@@ -55,11 +55,11 @@ export class AuthService {
     }
   }
 
-    getCurrentUser(): Observable<any> {
-    return this.currentUser$;
+  getCurrentUser(): string | null {
+    return localStorage.getItem(this.CURRENT_USER_KEY);
   }
 
-   getUserRole(): string {
+  getUserRole(): string {
     const token = this.getToken();
     if (token) {
       try {
@@ -72,13 +72,13 @@ export class AuthService {
     }
     return '';
   }
-  
+
 }
 
 export interface JwtPayload {
   sub: string;
   email: string;
-  'http://schemas.microsoft.com/ws/2008/06/identity/claims/role' : string; // Support single role or array of roles
+  'http://schemas.microsoft.com/ws/2008/06/identity/claims/role': string; // Support single role or array of roles
   exp: number;
 }
 
