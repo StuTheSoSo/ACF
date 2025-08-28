@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { BehaviorSubject, Observable } from 'rxjs';
 import { jwtDecode } from 'jwt-decode';
 
 @Injectable({
@@ -8,9 +7,9 @@ import { jwtDecode } from 'jwt-decode';
 })
 export class AuthService {
   private readonly TOKEN_KEY = 'jwt_token';
-  private readonly CURRENT_USER_KEY = "current_user";
+  private readonly CURRENT_USER_KEY = 'current_user';
 
-  constructor(private router: Router) { }
+  constructor(private router: Router) {}
 
   setUser(currentUser: string) {
     localStorage.setItem(this.CURRENT_USER_KEY, currentUser);
@@ -25,11 +24,10 @@ export class AuthService {
     return this.isTokenValid(token);
   }
 
-
   // Logout method to clear the JWT
   logout(): void {
     localStorage.removeItem(this.TOKEN_KEY);
-    localStorage.removeItem(this.CURRENT_USER_KEY)
+    localStorage.removeItem(this.CURRENT_USER_KEY);
     this.router.navigate(['login']);
   }
 
@@ -64,7 +62,9 @@ export class AuthService {
     if (token) {
       try {
         const decoded: JwtPayload = jwtDecode(token);
-        return decoded['http://schemas.microsoft.com/ws/2008/06/identity/claims/role']; // Extract the role claim
+        return decoded[
+          'http://schemas.microsoft.com/ws/2008/06/identity/claims/role'
+        ]; // Extract the role claim
       } catch (error) {
         console.error('Error decoding JWT token:', error);
         return '';
@@ -72,7 +72,6 @@ export class AuthService {
     }
     return '';
   }
-
 }
 
 export interface JwtPayload {
@@ -81,4 +80,3 @@ export interface JwtPayload {
   'http://schemas.microsoft.com/ws/2008/06/identity/claims/role': string; // Support single role or array of roles
   exp: number;
 }
-
