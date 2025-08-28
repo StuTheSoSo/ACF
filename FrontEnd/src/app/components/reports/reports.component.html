@@ -1,20 +1,21 @@
 <div class="router-div">
-    <div class="container">
-        <div>
-            <h1>Reporting</h1>
-            <div style="width: 50%">
-                <select name="report-select" (change)="reportTypeSelected($event)">
-                    <option value="">Select an Report</option>
-                    <option *ngFor="let report of reportTypes" [value]="report">{{report }}
-                    </option>
-                </select>
-            </div>
-            <div *ngIf="selectedReportType==='Case Reports'">
-                <app-case-report></app-case-report>
-            </div>
-            <div *ngIf="selectedReportType==='Usage Reports'">
-                <app-usage-report></app-usage-report>
-            </div>
-        </div>
+  <div class="container">
+    <div>
+      <h1>Reporting</h1>
+      <div style="width: 50%">
+        <select name="report-select" (change)="reportTypeSelected($event)">
+          <option value="">Select an Report</option>
+          <option *ngFor="let report of reportTypes" [value]="report">
+            {{ report }}
+          </option>
+        </select>
+      </div>
+      <div *ngIf="selectedReportType === 'Case Reports'">
+        <app-case-report></app-case-report>
+      </div>
+      <div *ngIf="selectedReportType === 'Usage Reports'">
+        <app-usage-report></app-usage-report>
+      </div>
     </div>
+  </div>
 </div>

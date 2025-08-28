@@ -6,13 +6,13 @@ import { DataService } from '../../services/data.service';
   selector: 'app-new-client.component',
   standalone: false,
   templateUrl: './new-client.component.html',
-  styleUrls: ['./new-client.component.css']
+  styleUrls: ['./new-client.component.css'],
 })
 export class NewClientComponent implements OnInit {
   newClient: Client = new Client();
   currentClients: Client[] = [];
 
-  constructor(private dataService: DataService) { }
+  constructor(private dataService: DataService) {}
   ngOnInit(): void {
     this.retrieveClients();
   }
@@ -24,10 +24,9 @@ export class NewClientComponent implements OnInit {
       },
       error: (err) => {
         console.error('err: ', err);
-      }
+      },
     });
   }
-
 
   clear(): void {
     this.newClient = new Client();
@@ -43,7 +42,7 @@ export class NewClientComponent implements OnInit {
       error: (err) => {
         console.error('err: ', err);
         alert(err.error);
-      }
+      },
     });
   }
 }

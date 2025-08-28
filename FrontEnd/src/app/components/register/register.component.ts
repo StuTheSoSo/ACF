@@ -8,18 +8,18 @@ import { Role } from '../../models/role';
   selector: 'app-register.component',
   standalone: false,
   templateUrl: './register.component.html',
-  styleUrls: ['./register.component.css']
+  styleUrls: ['./register.component.css'],
 })
 export class RegisterComponent implements OnInit {
-  roles: Role[] = [];;
+  roles: Role[] = [];
   selectedRoleId: string | null = null;
   registerObject: RegisterObject = new RegisterObject();
   confirmPassword: string = '';
 
-  constructor(private dataService: DataService, private router: Router) { }
+  constructor(private dataService: DataService, private router: Router) {}
 
   ngOnInit(): void {
-    // Get roles 
+    // Get roles
     this.dataService.getData('Role').subscribe({
       next: (response) => {
         this.roles = response;
@@ -33,11 +33,11 @@ export class RegisterComponent implements OnInit {
             return 1; // b comes before a
           }
           return 0; // names are equal
-        })
+        });
       },
       error: (err) => {
         console.error('err: ', err);
-      }
+      },
     });
   }
 
@@ -49,17 +49,18 @@ export class RegisterComponent implements OnInit {
     // HACK - DEMO ONLY. THIS WOULD NORMALLY INVOLVE A BETTER VALIDATION!
     if (this.registerObject.Password != this.confirmPassword) {
       alert('Password and Confirmation Password mismatch');
-    }
-    else {
-      this.dataService.postData('User/register', this.registerObject).subscribe({
-        next: (response) => {
-          // route to home
-          this.router.navigate(['login']);
-        },
-        error: (err) => {
-          console.error('err: ', err);
-        }
-      });
+    } else {
+      this.dataService
+        .postData('User/register', this.registerObject)
+        .subscribe({
+          next: (response) => {
+            // route to home
+            this.router.navigate(['login']);
+          },
+          error: (err) => {
+            console.error('err: ', err);
+          },
+        });
     }
   }
 }

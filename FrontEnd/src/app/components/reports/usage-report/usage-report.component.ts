@@ -5,13 +5,21 @@ import { DataService } from 'src/app/services/data.service';
 @Component({
   selector: 'app-usage-report',
   templateUrl: './usage-report.component.html',
-  styleUrls: ['./usage-report.component.css']
+  styleUrls: ['./usage-report.component.css'],
 })
 export class UsageReportComponent implements OnInit {
-  displayedColumns: string[] = ['message', 'level', 'timeStamp', 'exception', 'caseId', 'clientName', 'userName'];
+  displayedColumns: string[] = [
+    'message',
+    'level',
+    'timeStamp',
+    'exception',
+    'caseId',
+    'clientName',
+    'userName',
+  ];
   auditLogs: AuditLog[] = [];
 
-  constructor(private dataService: DataService) { }
+  constructor(private dataService: DataService) {}
 
   ngOnInit(): void {
     this.dataService.getData('Reports/getUsage').subscribe({
@@ -21,7 +29,7 @@ export class UsageReportComponent implements OnInit {
       },
       error: (err) => {
         console.error('err: ', err);
-      }
+      },
     });
   }
 
@@ -34,8 +42,10 @@ export class UsageReportComponent implements OnInit {
   private convertToCSV(objArray: any[], headerList: string[]): string {
     let csv = headerList.join(',') + '\n';
 
-    objArray.forEach(row => {
-      const values = headerList.map(field => JSON.stringify(row[field] ?? ''));
+    objArray.forEach((row) => {
+      const values = headerList.map((field) =>
+        JSON.stringify(row[field] ?? '')
+      );
       csv += values.join(',') + '\n';
     });
 
@@ -65,7 +75,9 @@ export class UsageReportComponent implements OnInit {
     const jsonContent = JSON.stringify(data, null, 2);
 
     // Create a Blob and trigger download
-    const blob = new Blob([jsonContent], { type: 'application/json;charset=utf-8;' });
+    const blob = new Blob([jsonContent], {
+      type: 'application/json;charset=utf-8;',
+    });
     const link = document.createElement('a');
     const url = URL.createObjectURL(blob);
     link.setAttribute('href', url);
@@ -74,5 +86,4 @@ export class UsageReportComponent implements OnInit {
     link.click();
     document.body.removeChild(link);
   }
-
 }

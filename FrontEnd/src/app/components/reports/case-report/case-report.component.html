@@ -1,16 +1,26 @@
-<div style="display: flex; gap: 20px;">
-    <span>
-        <label for="officer-select">Officer</label>
-        <select name="officer-select" (change)="officerSelected($event)">
-            <option value="" disabled selected>Select an Officer</option>
-            <option *ngFor="let officer of officersWithCases" [value]="officer.userId">{{officer.fullName }}</option>
-        </select>
-    </span>
-    <span style="width: 40%">
-        <label for="officer-select">Client</label>
-        <select name="officer-select" [disabled]="!selectedOfficerId">
-            <option value="" disabled selected>Select an Client</option>
-            <option *ngFor="let client of clientsPerOfficer" [value]="client.clientId">{{ client.fullName }}</option>
-        </select>
-    </span>
+<div style="display: flex; gap: 20px">
+  <span>
+    <label for="officer-select">Officer</label>
+    <select name="officer-select" (change)="officerSelected($event)">
+      <option value="" disabled selected>Select an Officer</option>
+      <option
+        *ngFor="let officer of officersWithCases"
+        [value]="officer.userId"
+      >
+        {{ officer.fullName }}
+      </option>
+    </select>
+  </span>
+  <span style="width: 40%">
+    <label for="officer-select">Client</label>
+    <select name="officer-select" [disabled]="!selectedOfficerId">
+      <option value="" disabled selected>Select an Client</option>
+      <option
+        *ngFor="let client of clientsPerOfficer"
+        [value]="client.clientId"
+      >
+        {{ client.fullName }}
+      </option>
+    </select>
+  </span>
 </div>

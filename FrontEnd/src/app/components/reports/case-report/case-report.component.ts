@@ -6,39 +6,40 @@ import { DataService } from 'src/app/services/data.service';
 @Component({
   selector: 'app-case-report',
   templateUrl: './case-report.component.html',
-  styleUrls: ['./case-report.component.css']
+  styleUrls: ['./case-report.component.css'],
 })
-export class CaseReportComponent implements OnInit{
+export class CaseReportComponent implements OnInit {
   officersWithCases: User[] = [];
   selectedOfficerId: string = '';
   clientsPerOfficer: Client[] = [];
 
-
-  constructor(private dataService: DataService){}
+  constructor(private dataService: DataService) {}
 
   ngOnInit(): void {
     // OnInit get distinct officers
-    this.dataService.getData("Reports/officers").subscribe({
+    this.dataService.getData('Reports/officers').subscribe({
       next: (response) => {
         this.officersWithCases = response;
       },
       error: (err) => {
         console.error('err: ', err);
-      }
+      },
     });
   }
 
-  officerSelected(event: Event){
+  officerSelected(event: Event) {
     const selectElement = event.target as HTMLSelectElement;
     this.selectedOfficerId = selectElement.value;
     // Get all clients for this officer
-        this.dataService.getData("Reports/clientsByOfficer/" + this.selectedOfficerId).subscribe({
-      next: (response) => {
-        this.clientsPerOfficer = response;
-      },
-      error: (err) => {
-        console.error('err: ', err);
-      }
-    });
+    this.dataService
+      .getData('Reports/clientsByOfficer/' + this.selectedOfficerId)
+      .subscribe({
+        next: (response) => {
+          this.clientsPerOfficer = response;
+        },
+        error: (err) => {
+          console.error('err: ', err);
+        },
+      });
   }
 }

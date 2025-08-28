@@ -2,7 +2,11 @@
   <nav class="sidebar-nav">
     <ul>
       <li *ngFor="let item of navItems">
-        <a [routerLink]="item.route" routerLinkActive="active" (click)="toggleSidebar()">
+        <a
+          [routerLink]="item.route"
+          routerLinkActive="active"
+          (click)="toggleSidebar()"
+        >
           <span>{{ item.name }}</span>
         </a>
       </li>

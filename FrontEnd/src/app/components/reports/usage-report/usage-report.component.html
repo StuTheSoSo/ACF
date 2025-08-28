@@ -1,64 +1,75 @@
-<div style="display: flex; flex-direction: column; gap: 20px;">
-  <div style="display: flex; gap: 20px;">
-    <button mat-raised-button color="primary" (click)="exportToCsv()" aria-label="Export audit logs to CSV">Export CSV</button>
-    <button mat-raised-button color="accent" (click)="exportToJson()" aria-label="Export audit logs to JSON">Export to JSON</button>
+<div style="display: flex; flex-direction: column; gap: 20px">
+  <div style="display: flex; gap: 20px">
+    <button
+      mat-raised-button
+      color="primary"
+      (click)="exportToCsv()"
+      aria-label="Export audit logs to CSV"
+    >
+      Export CSV
+    </button>
+    <button
+      mat-raised-button
+      color="accent"
+      (click)="exportToJson()"
+      aria-label="Export audit logs to JSON"
+    >
+      Export to JSON
+    </button>
   </div>
 
-
-
-    <table mat-table [dataSource]="auditLogs" class="mat-elevation-z8" *ngIf="auditLogs.length > 0">
-
-        <!--- Note that these columns can be defined in any order.
+  <table
+    mat-table
+    [dataSource]="auditLogs"
+    class="mat-elevation-z8"
+    *ngIf="auditLogs.length > 0"
+  >
+    <!--- Note that these columns can be defined in any order.
         The actual rendered columns are set as a property on the row definition" -->
 
-        <!-- Position Column -->
-        <ng-container matColumnDef="message">
-            <th mat-header-cell *matHeaderCellDef> message </th>
-            <td mat-cell *matCellDef="let element"> {{element.message}} </td>
-        </ng-container>
+    <!-- Position Column -->
+    <ng-container matColumnDef="message">
+      <th mat-header-cell *matHeaderCellDef>message</th>
+      <td mat-cell *matCellDef="let element">{{ element.message }}</td>
+    </ng-container>
 
-        Name Column
-        <ng-container matColumnDef="level">
-            <th mat-header-cell *matHeaderCellDef> level </th>
-            <td mat-cell *matCellDef="let element"> {{element.level}} </td>
-        </ng-container>
+    Name Column
+    <ng-container matColumnDef="level">
+      <th mat-header-cell *matHeaderCellDef>level</th>
+      <td mat-cell *matCellDef="let element">{{ element.level }}</td>
+    </ng-container>
 
-        <!-- Weight Column -->
-        <ng-container matColumnDef="timeStamp">
-            <th mat-header-cell *matHeaderCellDef> Date/Time </th>
-            <td mat-cell *matCellDef="let element"> {{element.timeStamp}} </td>
-        </ng-container>
+    <!-- Weight Column -->
+    <ng-container matColumnDef="timeStamp">
+      <th mat-header-cell *matHeaderCellDef>Date/Time</th>
+      <td mat-cell *matCellDef="let element">{{ element.timeStamp }}</td>
+    </ng-container>
 
-        <!-- Symbol Column -->
-        <ng-container matColumnDef="exception">
-            <th mat-header-cell *matHeaderCellDef> Exception </th>
-            <td mat-cell *matCellDef="let element"> {{element.exeption}} </td>
-        </ng-container>
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="exception">
+      <th mat-header-cell *matHeaderCellDef>Exception</th>
+      <td mat-cell *matCellDef="let element">{{ element.exeption }}</td>
+    </ng-container>
 
-        <!-- Symbol Column -->
-        <ng-container matColumnDef="caseId">
-            <th mat-header-cell *matHeaderCellDef> Case Id </th>
-            <td mat-cell *matCellDef="let element"> {{element.caseId}} </td>
-        </ng-container>
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="caseId">
+      <th mat-header-cell *matHeaderCellDef>Case Id</th>
+      <td mat-cell *matCellDef="let element">{{ element.caseId }}</td>
+    </ng-container>
 
-        <!-- Symbol Column -->
-        <ng-container matColumnDef="clientName">
-            <th mat-header-cell *matHeaderCellDef> Client Name </th>
-            <td mat-cell *matCellDef="let element"> {{element.clientName}} </td>
-        </ng-container>
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="clientName">
+      <th mat-header-cell *matHeaderCellDef>Client Name</th>
+      <td mat-cell *matCellDef="let element">{{ element.clientName }}</td>
+    </ng-container>
 
-        <!-- Symbol Column -->
-        <ng-container matColumnDef="userName">
-            <th mat-header-cell *matHeaderCellDef> User Name </th>
-            <td mat-cell *matCellDef="let element"> {{element.userName}} </td>
-        </ng-container>
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="userName">
+      <th mat-header-cell *matHeaderCellDef>User Name</th>
+      <td mat-cell *matCellDef="let element">{{ element.userName }}</td>
+    </ng-container>
 
-        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-    </table>
-
-
-
-
-
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>
 </div>

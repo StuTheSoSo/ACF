@@ -1,50 +1,50 @@
 <div class="router-div">
-    <div class="container">
-        <div class="div1">
-            <h1>New Client</h1>
-            <table>
-                <tr>
-                    <td><span>First Name:</span></td>
-                    <td><input [(ngModel)]="newClient.firstName"></td>
-                </tr>
-                <tr>
-                    <td><span>Last Name:</span></td>
-                    <td><input [(ngModel)]="newClient.lastName"></td>
-                </tr>
-                <tr>
-                    <td><span>SSN:</span></td>
-                    <td><input [(ngModel)]="newClient.ssn"></td>
-                </tr>
-                <tr>
-                    <td><span>Eligibility:</span></td>
-                    <td><input [(ngModel)]="newClient.eligibility"></td>
-                </tr>
-                <tr>
-                    <td colspan="2">
-                        <div class="button-div">
-                            <button type="button" (click)="clear()">Clear</button>
-                            <button type="button" (click)="addClient()">Add</button>
-                        </div>
-                    </td>
-                </tr>
-            </table>
-        </div>
-        <div class="div2">
-            <h1>Current Clients</h1>
-            <table>
-                <tr>
-                    <th>First Name</th>
-                    <th>Last Name</th>
-                    <th>SSN</th>
-                    <th>Eligibility</th>
-                </tr>
-                <tr *ngFor="let client of currentClients">
-                    <td>{{ client.firstName }}</td>
-                    <td>{{ client.lastName }}</td>
-                    <td>{{ client.ssn }}</td>
-                    <td>{{ client.eligibility }}</td>
-                </tr>
-            </table>
-        </div>
+  <div class="container">
+    <div class="div1">
+      <h1>New Client</h1>
+      <table>
+        <tr>
+          <td><span>First Name:</span></td>
+          <td><input [(ngModel)]="newClient.firstName" /></td>
+        </tr>
+        <tr>
+          <td><span>Last Name:</span></td>
+          <td><input [(ngModel)]="newClient.lastName" /></td>
+        </tr>
+        <tr>
+          <td><span>SSN:</span></td>
+          <td><input [(ngModel)]="newClient.ssn" /></td>
+        </tr>
+        <tr>
+          <td><span>Eligibility:</span></td>
+          <td><input [(ngModel)]="newClient.eligibility" /></td>
+        </tr>
+        <tr>
+          <td colspan="2">
+            <div class="button-div">
+              <button type="button" (click)="clear()">Clear</button>
+              <button type="button" (click)="addClient()">Add</button>
+            </div>
+          </td>
+        </tr>
+      </table>
     </div>
+    <div class="div2">
+      <h1>Current Clients</h1>
+      <table>
+        <tr>
+          <th>First Name</th>
+          <th>Last Name</th>
+          <th>SSN</th>
+          <th>Eligibility</th>
+        </tr>
+        <tr *ngFor="let client of currentClients">
+          <td>{{ client.firstName }}</td>
+          <td>{{ client.lastName }}</td>
+          <td>{{ client.ssn }}</td>
+          <td>{{ client.eligibility }}</td>
+        </tr>
+      </table>
+    </div>
+  </div>
 </div>

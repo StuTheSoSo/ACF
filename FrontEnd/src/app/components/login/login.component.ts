@@ -7,19 +7,21 @@ import { Router } from '@angular/router';
   selector: 'app-login.component',
   standalone: false,
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.css'],
 })
 export class LoginComponent {
-
   username: string = '';
   password: string = '';
   private tokenKey = 'jwt_token';
 
+  constructor(
+    private dataService: DataService,
+    private authService: AuthService,
+    private router: Router
+  ) {}
 
-  constructor(private dataService: DataService, private authService: AuthService, private router: Router){}
-
-  login(): void{
-    let loginObject = {'Username': this.username, 'Password': this.password };
+  login(): void {
+    let loginObject = { Username: this.username, Password: this.password };
     this.dataService.postData('User/login', loginObject).subscribe({
       next: (response) => {
         // save token
@@ -32,7 +34,7 @@ export class LoginComponent {
       error: (err) => {
         console.error('err: ', err);
         alert(err.error);
-      }
+      },
     });
   }
 }

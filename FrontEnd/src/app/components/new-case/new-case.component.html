@@ -1,73 +1,86 @@
 <div class="router-div">
-    <div class="container">
-        <div class="div1">
-            <h1>New Case</h1>
-            <table>
-                <tr>
-                    <td><span>Client:</span></td>
-                    <td>
-                        <select (change)="clientUpdated($event)">
-                            <option *ngFor="let client of currentClients" [value]="client.clientId">{{ client.lastName }}, {{client.firstName }}</option>
-                           
-                        </select>
-                    </td>
-                </tr>
-                <tr>
-                    <td><span>Officer:</span></td>
-                    <td>
-                        <select (change)="officerUpdated($event)">
-                            <option *ngFor="let officer of currentOfficers" [value]="officer.userId">{{ officer.lastName }}, {{officer.firstName }}</option>                            
-                        </select>
-                    </td>
-                </tr>
-                <tr>
-                    <td><span>Status:</span></td>
-                    <td>
-                        <select (change)="statusUpdated($event)">
-                            <option *ngFor="let status of statusValues" [value]="status">{{ status }}</option>
-                        </select>
-                    </td>
-                </tr>
-                <tr>
-                    <td><span>Region:</span></td>
-                    <td>
-                        <select (change)="regionUpdated($event)">
-                            <option *ngFor="let region of regionValues" [value]="region">{{ region }}</option>
-                        </select>
-                    </td>
-                </tr>
-                <tr>
-                    <td><span>Recommendations:</span></td>
-                    <td>
-                        <input [(ngModel)]="newCase.recommendations">
-                    </td>
-                </tr>
-                <tr>
-                    <td colspan="2">
-                        <div class="button-div">
-                            <button type="button" (click)="clear()">Clear</button>
-                            <button type="button" (click)="addCase()">Add</button>
-                        </div>
-                    </td>
-                </tr>
-            </table>
-        </div>
-        <div class="div2">
-            <h1>Current Cases</h1>
-            <table>
-                <tr>
-                    <th>Client</th>
-                    <th>Officer</th>
-                    <th>Status</th>
-                    <th>Region</th>
-                </tr>
-                <tr *ngFor="let case of currentCases">
-                    <td>{{ case.clientName }}</td>
-                    <td>{{ case.officerName }}</td>
-                    <td>{{ case.status }}</td>
-                    <td>{{ case.region }}</td>
-                </tr>                
-            </table>
-        </div>
+  <div class="container">
+    <div class="div1">
+      <h1>New Case</h1>
+      <table>
+        <tr>
+          <td><span>Client:</span></td>
+          <td>
+            <select (change)="clientUpdated($event)">
+              <option
+                *ngFor="let client of currentClients"
+                [value]="client.clientId"
+              >
+                {{ client.lastName }}, {{ client.firstName }}
+              </option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td><span>Officer:</span></td>
+          <td>
+            <select (change)="officerUpdated($event)">
+              <option
+                *ngFor="let officer of currentOfficers"
+                [value]="officer.userId"
+              >
+                {{ officer.lastName }}, {{ officer.firstName }}
+              </option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td><span>Status:</span></td>
+          <td>
+            <select (change)="statusUpdated($event)">
+              <option *ngFor="let status of statusValues" [value]="status">
+                {{ status }}
+              </option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td><span>Region:</span></td>
+          <td>
+            <select (change)="regionUpdated($event)">
+              <option *ngFor="let region of regionValues" [value]="region">
+                {{ region }}
+              </option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td><span>Recommendations:</span></td>
+          <td>
+            <input [(ngModel)]="newCase.recommendations" />
+          </td>
+        </tr>
+        <tr>
+          <td colspan="2">
+            <div class="button-div">
+              <button type="button" (click)="clear()">Clear</button>
+              <button type="button" (click)="addCase()">Add</button>
+            </div>
+          </td>
+        </tr>
+      </table>
     </div>
+    <div class="div2">
+      <h1>Current Cases</h1>
+      <table>
+        <tr>
+          <th>Client</th>
+          <th>Officer</th>
+          <th>Status</th>
+          <th>Region</th>
+        </tr>
+        <tr *ngFor="let case of currentCases">
+          <td>{{ case.clientName }}</td>
+          <td>{{ case.officerName }}</td>
+          <td>{{ case.status }}</td>
+          <td>{{ case.region }}</td>
+        </tr>
+      </table>
+    </div>
+  </div>
 </div>

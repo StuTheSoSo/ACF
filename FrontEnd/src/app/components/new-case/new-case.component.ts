@@ -8,7 +8,7 @@ import { User } from '../../models/user';
   selector: 'app-new-case.component',
   standalone: false,
   templateUrl: './new-case.component.html',
-  styleUrls: ['./new-case.component.css']
+  styleUrls: ['./new-case.component.css'],
 })
 export class NewCaseComponent implements OnInit {
   newCase: Case = new Case();
@@ -20,7 +20,7 @@ export class NewCaseComponent implements OnInit {
   statusValues = ['Active', 'Inactive'];
   regionValues = ['North', 'South', 'East', 'West'];
 
-  constructor(private dataService: DataService) { }
+  constructor(private dataService: DataService) {}
 
   ngOnInit(): void {
     this.retrieveCases();
@@ -37,7 +37,7 @@ export class NewCaseComponent implements OnInit {
       },
       error: (err) => {
         console.error('err: ', err);
-      }
+      },
     });
   }
 
@@ -49,7 +49,7 @@ export class NewCaseComponent implements OnInit {
       },
       error: (err) => {
         console.error('err: ', err);
-      }
+      },
     });
   }
 
@@ -57,12 +57,12 @@ export class NewCaseComponent implements OnInit {
     this.dataService.getData('User/getOfficers').subscribe({
       next: (response) => {
         this.currentOfficers = response;
-        console.log('officers:', this.currentOfficers)
+        console.log('officers:', this.currentOfficers);
         this.newCase.officerId = this.currentOfficers[0].userId;
       },
       error: (err) => {
         console.error('err: ', err);
-      }
+      },
     });
   }
 
@@ -80,7 +80,7 @@ export class NewCaseComponent implements OnInit {
       error: (err) => {
         console.error('err: ', err);
         alert(err.error);
-      }
+      },
     });
   }
 

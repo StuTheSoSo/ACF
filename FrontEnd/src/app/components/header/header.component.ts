@@ -9,7 +9,7 @@ import { Subscription } from 'rxjs';
   standalone: true,
   imports: [CommonModule], // Import CommonModule for *ngIf
   templateUrl: './header.component.html',
-  styleUrls: [ './header.component.css']
+  styleUrls: ['./header.component.css'],
 })
 export class HeaderComponent implements OnInit, OnDestroy {
   username: string | null = null;
@@ -21,7 +21,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.username = this.authService.getCurrentUser();
   }
 
-    ngOnDestroy(): void {
+  ngOnDestroy(): void {
     // Unsubscribe to prevent memory leaks
     this.userSubscription.unsubscribe();
   }
