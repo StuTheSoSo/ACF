@@ -1,5 +1,8 @@
-<div style="display: flex; gap: 20px;">
-
+<div style="display: flex; flex-direction: column; gap: 20px;">
+  <div style="display: flex; gap: 20px;">
+    <button mat-raised-button color="primary" (click)="exportToCsv()" aria-label="Export audit logs to CSV">Export CSV</button>
+    <button mat-raised-button color="accent" (click)="exportToJson()" aria-label="Export audit logs to JSON">Export to JSON</button>
+  </div>
 
 
 
