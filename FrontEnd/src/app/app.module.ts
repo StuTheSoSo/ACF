@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { RouterModule } from '@angular/router'; 
+import { RouterModule } from '@angular/router';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 
 import { routes } from './app.routes';
@@ -20,8 +20,7 @@ import { AdminComponent } from './components/admin/admin.component';
 import { UsageReportComponent } from './components/reports/usage-report/usage-report.component';
 import { CaseReportComponent } from './components/reports/case-report/case-report.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {MatTableModule} from '@angular/material/table';
-
+import { MatTableModule } from '@angular/material/table';
 
 @NgModule({
   declarations: [
@@ -34,7 +33,7 @@ import {MatTableModule} from '@angular/material/table';
     ReportsComponent,
     AdminComponent,
     UsageReportComponent,
-    CaseReportComponent
+    CaseReportComponent,
   ],
   imports: [
     BrowserModule,
@@ -45,11 +44,11 @@ import {MatTableModule} from '@angular/material/table';
     HeaderComponent,
     SidebarComponent,
     BrowserAnimationsModule,
-    MatTableModule
+    MatTableModule,
   ],
   providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

@@ -39,6 +39,7 @@ export class UsageReportComponent implements OnInit {
     this.downloadCSV(csvData, 'table-data.csv');
   }
 
+  // Export to CSV Logic
   private convertToCSV(objArray: any[], headerList: string[]): string {
     let csv = headerList.join(',') + '\n';
 
@@ -52,6 +53,7 @@ export class UsageReportComponent implements OnInit {
     return csv;
   }
 
+  // Download CSV Logic
   private downloadCSV(csvData: string, filename: string) {
     const blob = new Blob([csvData], { type: 'text/csv;charset=utf-8;' });
     const url = URL.createObjectURL(blob);

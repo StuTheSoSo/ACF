@@ -13,12 +13,17 @@ namespace BackEnd.Controllers
         /// <summary> The logger </summary>
         private readonly ILogger<CaseController> _logger;
 
+        /// <summary>Initializes a new instance of the <see cref="ReportsController"/> class.</summary>
+        /// <param name="context">The context.</param>
+        /// <param name="logger">The logger.</param>
         public ReportsController(AppDbContext context, ILogger<CaseController> logger)
         {
             _context = context;
             _logger = logger;
         }
 
+        /// <summary>Gets the o fficers.</summary>
+        /// <returns></returns>
         [HttpGet("officers")]
         public IActionResult GetOFficers()
         {
@@ -35,6 +40,9 @@ namespace BackEnd.Controllers
             return Ok(officers);
         }
 
+        /// <summary>Gets the clients by officer.</summary>
+        /// <param name="officerId">The officer identifier.</param>
+        /// <returns></returns>
         [HttpGet("clientsByOfficer/{officerId}")]
         public IActionResult GetClientsByOfficer(Guid officerId)
         {
@@ -51,6 +59,10 @@ namespace BackEnd.Controllers
             return Ok(clients);
         }
 
+        /// <summary>Gets the cases by officer and client.</summary>
+        /// <param name="officerId">The officer identifier.</param>
+        /// <param name="clientId">The client identifier.</param>
+        /// <returns></returns>
         [HttpGet("casesByOfficerAndClient/{officerId}/{clientId}")]
         public IActionResult GetCasesByOfficerAndClient(Guid officerId, Guid clientId)
         {
@@ -60,6 +72,8 @@ namespace BackEnd.Controllers
             return Ok(cases);
         }
 
+        /// <summary>Gets the usage.</summary>
+        /// <returns></returns>
         [HttpGet("getUsage")]
         public IActionResult GetUsage()
         {
